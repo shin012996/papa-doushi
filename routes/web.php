@@ -18,3 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//papa-doushi
+Route::get('/papa-doushi', 'PapaDoushiController@index')->name('toppage');
+Route::get('/papa-doushi/post', 'PapaDoushiController@post')->name('post');
