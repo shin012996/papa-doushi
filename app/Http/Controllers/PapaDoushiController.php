@@ -15,4 +15,24 @@ class PapaDoushiController extends Controller
     {
         return view('papa-doushi.post');
     }
+
+    public function consult()
+    {
+        return view('papa-doushi.consult');
+    }
+
+    public function wiki()
+    {
+        return view('papa-doushi.wiki');
+    }
+
+    public function q_a()
+    {
+        return view('papa-doushi.q_a');
+    }
+
+    public function help()
+    {
+        return view('papa-doushi.help');
+    }
 }

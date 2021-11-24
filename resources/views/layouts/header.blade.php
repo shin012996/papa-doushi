@@ -10,7 +10,16 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <!-- Left Side Of Navbar -->
           <ul class="navbar-nav mr-auto">
-
+            <div class="py-3">
+              <div class="nav-scroller py-1 mb-2 border-bottom-1">
+                <nav class="nav d-flex justify-content-atart">
+                  <a class="p-2 text-muted" href="{{  url('/papa-doushi/consult') }}">相談する</a>
+                  <a class="p-2 text-muted" href="{{ url('/papa-doushi/wiki') }}">Wiki</a>
+                  <a class="p-2 text-muted" href="{{ url('/papa-doushi/q_a') }}">Q＆A</a>
+                  <a class="p-2 text-muted" href="{{ url('/papa-doushi/help') }}">ヘルプ</a>
+                </nav>
+              </div>
+            </div>
           </ul>
 
           <!-- Right Side Of Navbar -->
@@ -48,16 +57,3 @@
       </div>
   </div>
 </nav>
-
-<div class="container">
-  <div class="header py-3">
-    <div class="nav-scroller py-1 mb-2 border-bottom-1">
-      <nav class="nav d-flex justify-content-atart">
-        <a class="p-2 text-muted" href="#">相談する</a>
-        <a class="p-2 text-muted" href="#">Wiki</a>
-        <a class="p-2 text-muted" href="#">Q＆A</a>
-        <a class="p-2 text-muted" href="#">ヘルプ</a>
-      </nav>
-    </div>
-  </div>
-</div>
