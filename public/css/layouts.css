@@ -1,0 +1,39 @@
+
+
+/* header */
+
+
+/* footer */
+.footer_inner{
+
+}
+
+.footer_logo {
+  margin: 0 auto;
+  width: 80px;
+} 
+
+.Copyright {
+  margin: 0 0 0 auto;
+}
+
+
+/* PC */
+@media screen and (min-width: 768px) {
+  .sp {
+    display: none;
+  }
+  
+  .right-nav {
+    width: 0;
+  }
+}
+
+/* スマホ */
+@media screen and (max-width: 767px) {
+  .pc {
+    display: none;
+  }
+
+  
+}
