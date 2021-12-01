@@ -1,6 +1,6 @@
 @extends('layouts/app')
 @section('content')
-@section('title', 'パパドウシ | TOP')
+@section('title', 'パパドウシ | 育児に向き合うパパ達のQ&Aサイト')
 <body>
   <div class="container">
     <!-- top pageのカルーセル-->
@@ -33,15 +33,14 @@
   <div class="container">
     <div class="row flex-xl-nowrap pt-5">
       <div class="col-xl-8">
-        <h5 class="">あなたの経験を元に、アドバイスをしてみませんか？</h5>
         <!-- タブの表示設定 -->
-        <ul id="myTabs" class="nav nav-tabs ">
+        <ul id="myTabs" class="nav nav-tabs">
           <li role="presentation" class="active">
             <a href="#follow"  aria-controls="follow" role="tab" data-toggle="tab" class="text-dark nav-link active">フォロー</a>
           </li>
           <li role="presentation"><a href="#new" aria-controls="new" role="tab" data-toggle="tab" class="text-dark nav-link">新着</a></li>
           <li role="presentation"><a href="#no-ans" aria-controls="no-ans" role="tab" data-toggle="tab" class="text-dark nav-link">未回答</a></li>
-          <li role="presentation"><a href="#relevant" aria-controls="relevant" role="tab" data-toggle="tab" class="text-dark nav-link">関連性の高い質問</a></li>
+          <li role="presentation"><a href="#relevant" aria-controls="relevant" role="tab" data-toggle="tab" class="text-dark nav-link">関連する</a></li>
         </ul>
         <!-- Tab panels(以下、タブを押したときに表示する中身) -->
         <div class="tab-content p-2 ">
@@ -152,17 +151,17 @@
           </div>
         </div>
       </div>
-      <div class="col-xl-4">
+      <div class="col-md-8 col-lg-6 col-xl-4">
         <div class="card">
           <div class="card-body">
             <h5>お知らせ</h5>
-            <div class=" mb-4 col-md-10 flex-md-row border-bottom border-secondary">
-              <div class="col-md-4">2021年12月12日</div>
-              <a class="mb-1 col-md-10 text-muted" href="#">パパドウシ運営からのお知らせ</a>
+            <div class=" mb-4 col-md-12 col-lg-12 flex-md-row border-bottom border-secondary">
+              <div class="col-md-6 col-lg-12">2021年12月12日</div>
+              <a class="mb-1 col-md-10 col-lg-12 text-muted" href="#">パパドウシ運営からのお知らせ</a>
             </div>
-            <div class=" mb-4 col-md-10 flex-md-row border-bottom border-secondary">
-              <div class="col-md-4">2021年12月12日</div>
-              <a class="mb-1 col-md-10 text-muted" href="#">パパドウシ運営からのお知らせ</a>
+            <div class=" mb-4 col-md-12 col-lg-12 flex-md-row border-bottom border-secondary">
+              <div class="col-md-6 col-lg-12">2021年12月12日</div>
+              <a class="mb-1 col-md-10 col-lg-12 text-muted" href="#">パパドウシ運営からのお知らせ</a>
             </div>
           </div>
         </div>
