@@ -1,43 +1,66 @@
-
-
 /* header */
 
 
 /* footer */
-.footer_inner{
-
-}
-
-.footer_logo {
-  margin: 0 auto;
-  width: 80px;
-} 
-
-.Copyright {
-  margin: 0 0 0 auto;
-}
 
 
-/* PC */
-@media screen and (min-width: 768px) {
-  .sp {
-    display: none;
-  }
-  
-  .right-nav {
-    width: 0;
-  }
-}
+/* index */
 
-/* スマホ */
-@media screen and (max-width: 767px) {
+
+/* Extra small devices: Phones (<576px) */
+@media (max-width: 575px) {
   .pc {
     display: none;
   }
 
-  .headerSearchBar {
-    
+  .container {
+    max-width: 540px;
+  }
+}
+ 
+/* Small devices: Phablet (≥576px) */
+@media (min-width: 576px) and (max-width: 767px) {
+  .pc {
+    display: none;
   }
 
-  
+  .container {
+    max-width: 540px;
+  }
 }
+ 
+/* Medium devices: Tablets (≥768px) */
+@media (min-width: 768px) and (max-width: 991px) {
+  .sp {
+    display: none;
+  }
+
+  .container {
+    max-width: 720px;
+  }
+}
+ 
+/* Large devices: laptop (≥992px) */
+@media (min-width: 992px) and (max-width: 1199px) {
+  .sp {
+    display: none;
+  }
+
+  .container {
+    max-width: 960px;
+  }
+}
+ 
+/* Extra Large devices: Desktops (≥1200px) */
+@media (min-width: 1200px) {
+  .sp {
+    display: none;
+  }
+
+  .container {
+    max-width: 1140px;
+  }
+}
+
+
+

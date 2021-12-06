@@ -21,6 +21,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //papa-doushi
 Route::get('/papa-doushi', 'PapaDoushiController@index');
-Route::get('/papa-doushi/consult', 'PapaDoushiController@consult');
+Route::get('/papa-doushi/post', 'PapaDoushiController@post');
 Route::get('/papa-doushi/help', 'PapaDoushiController@help');
 Route::get('/papa-doushi/about', 'PapaDoushiController@about');
+Route::get('/papa-doushi/users', 'PapaDoushiController@users'); 
