@@ -1,7 +1,7 @@
 @extends('layouts/app')
 @section('content')
 @section('title', 'パパドウシ | 育児に向き合うパパ達のQ&Aサイト')
-<body>
+<div class="toppage bg-white">
   <div class="container">
     <!-- top pageのカルーセル-->
     <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
@@ -34,15 +34,30 @@
     <div class="row flex-xl-nowrap pt-5">
       <div class="col-xl-8">
         <!-- タブの表示設定 -->
-        <ul id="myTabs" class="nav nav-tabs">
-          <li class="active">
-            <a href="#follow"  aria-controls="follow" role="tab" data-toggle="tab" class="text-dark nav-link active">フォロー</a>
-          </li>
-          <li><a href="#new" aria-controls="new" role="tab" data-toggle="tab" class="text-dark nav-link">新着</a></li>
-          <li><a href="#no-ans" aria-controls="no-ans" role="tab" data-toggle="tab" class="text-dark nav-link">未回答</a></li>
-          <li><a href="#unsolved" aria-controls="unsolved" role="tab" data-toggle="tab" class="text-dark nav-link">未解決</a></li>
-          <li><a href="#solved" aria-controls="solved" role="tab" data-toggle="tab" class="text-dark nav-link">解決済</a></li>
-        </ul>
+        <div class="scroll-nav">
+          <div class="scroll-nav__view">
+            <ul id="myTabs" class="scroll-nav__list nav">
+              <li class="scroll-nav__item active">
+                <a href="#follow"  aria-controls="follow" role="tab" data-toggle="tab" class="text-dark nav-link active">フォロー</a>
+              </li>
+              <li class="scroll-nav__item">
+                <a href="#new" aria-controls="new" role="tab" data-toggle="tab" class="text-dark nav-link">新着</a>
+              </li>
+              <li class="scroll-nav__item">
+                <a href="#no-ans" aria-controls="no-ans" role="tab" data-toggle="tab" class="text-dark nav-link">未回答</a>
+              </li>
+              <li class="scroll-nav__item">
+                <a href="#unsolved" aria-controls="unsolved" role="tab" data-toggle="tab" class="text-dark nav-link">未解決</a>
+              </li>
+              <li class="scroll-nav__item">
+                <a href="#solved" aria-controls="solved" role="tab" data-toggle="tab" class="text-dark nav-link">解決済</a>
+              </li>
+            </ul>
+          </div>
+          <div class="next-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M8.72 18.78a.75.75 0 001.06 0l6.25-6.25a.75.75 0 000-1.06L9.78 5.22a.75.75 0 00-1.06 1.06L14.44 12l-5.72 5.72a.75.75 0 000 1.06z"></path></svg>
+          </div>
+        </div>
         <!-- Tab panels(以下、タブを押したときに表示する中身) -->
         <div class="tab-content p-2 ">
           <div role="tabpanel" class="tab-pane active fade show" id="follow">
@@ -98,10 +113,32 @@
                     <p class="card-text mb-auto">タグ一覧</p>
                   </div>
                 </div>
+
+                <nav aria-label="page Navigation">
+                  <ul class="pagination ">
+                    <li class="page-item disabled">
+                      <a class="page-link" href="#" aria-label="Previous Page">
+                        <span aria-hidden="true">&laquo;</span>
+                      </a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">4</a></li>
+                    <li class="page-item"><a class="page-link" href="#">5</a></li>
+                    <li class="page-item">
+                      <a class="page-link" href="#" aria-label="Next Page">
+                        <span aria-hidden="true">&raquo;</span>
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
+
               </div>
             </div> 
           </div>
     
+          <!-- new -->
           <div role="tabpanel" class="tab-pane fade" id="new">
             <div class="d-hlex col-12">
               <div class="card flex-row mb-4 shadow-sm h-md-250 col-12">
@@ -120,9 +157,29 @@
                   <p class="card-text mb-auto">タグ一覧</p>
                 </div>
               </div>
+              <nav aria-label="page Navigation">
+                <ul class="pagination ">
+                  <li class="page-item disabled">
+                    <a class="page-link" href="#" aria-label="Previous Page">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item"><a class="page-link" href="#">4</a></li>
+                  <li class="page-item"><a class="page-link" href="#">5</a></li>
+                  <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next Page">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
             </div>
           </div>
-    
+
+          <!-- no-ans -->
           <div role="tabpanel" class="tab-pane fade" id="no-ans">
             <div class="d-hlex col-12">
               <div class="card flex-row mb-4 shadow-sm h-md-250 col-12">
@@ -141,6 +198,27 @@
                   <p class="card-text mb-auto">タグ一覧</p>
                 </div>
               </div>
+
+              <nav aria-label="page Navigation">
+                <ul class="pagination ">
+                  <li class="page-item disabled">
+                    <a class="page-link" href="#" aria-label="Previous Page">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item"><a class="page-link" href="#">4</a></li>
+                  <li class="page-item"><a class="page-link" href="#">5</a></li>
+                  <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next Page">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+
             </div>
           </div>
     
@@ -162,6 +240,27 @@
                   <p class="card-text mb-auto">タグ一覧</p>
                 </div>
               </div>
+
+              <nav aria-label="page Navigation">
+                <ul class="pagination ">
+                  <li class="page-item disabled">
+                    <a class="page-link" href="#" aria-label="Previous Page">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item"><a class="page-link" href="#">4</a></li>
+                  <li class="page-item"><a class="page-link" href="#">5</a></li>
+                  <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next Page">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+
             </div>  
           </div>
 
@@ -183,6 +282,27 @@
                   <p class="card-text mb-auto">タグ一覧</p>
                 </div>
               </div>
+
+              <nav aria-label="page Navigation">
+                <ul class="pagination ">
+                  <li class="page-item disabled">
+                    <a class="page-link" href="#" aria-label="Previous Page">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item"><a class="page-link" href="#">4</a></li>
+                  <li class="page-item"><a class="page-link" href="#">5</a></li>
+                  <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next Page">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+              
             </div>     
           </div>
         </div>
@@ -208,7 +328,7 @@
     <script type="text/javascript" src="js/bootstrap.bundle.js"></script>
   </div>
   
-</body>
+</div>
 
 
 

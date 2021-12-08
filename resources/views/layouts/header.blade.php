@@ -1,4 +1,4 @@
-<header class="bg-white shadow-sm">
+<div class="header bg-white shadow">
   <div class="container-fluid  navbar navbar-expand-md col-12">
     <a class="navbar-brand col-7 col-md-2" href="{{ url('/papa-doushi') }}">
       <img src="{{ asset('img/logo _Rec2.png') }}" alt="papa-doushi">
@@ -16,13 +16,6 @@
       
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">      
       <ul class="navbar-nav col-sm-12 col-md-6 justify-content-between">
-        <li class="nav-item p-3">
-          <button class="btn btn-sm btn-outline-light">
-            <a class="nav-link text-dark" href="#"><span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M11.03 2.59a1.5 1.5 0 011.94 0l7.5 6.363a1.5 1.5 0 01.53 1.144V19.5a1.5 1.5 0 01-1.5 1.5h-5.75a.75.75 0 01-.75-.75V14h-2v6.25a.75.75 0 01-.75.75H4.5A1.5 1.5 0 013 19.5v-9.403c0-.44.194-.859.53-1.144l7.5-6.363zM12 3.734l-7.5 6.363V19.5h5v-6.25a.75.75 0 01.75-.75h3.5a.75.75 0 01.75.75v6.25h5v-9.403L12 3.734z"></path></svg></span>
-            {{ __('ホーム') }}
-            </a>
-          </button>
-        </li>
         <li class="nav-item">
           <!-- 検索バー -->
           <form class="form-inline">
@@ -46,9 +39,9 @@
           <div class="dropdown-menu" aria-labelleadby="dropdownMenu1">
             <li class="doropdown-item">
               <button class="btn btn-sm btn-outline-light pl-4">
-                <a class="nav-link text-dark" href="{{ url('/papa-doushi/users/user-pages') }}">
+                <a class="nav-link text-dark" href="{{ url('/papa-doushi/mypage') }}">
                   <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M12 2.5a5.5 5.5 0 00-3.096 10.047 9.005 9.005 0 00-5.9 8.18.75.75 0 001.5.045 7.5 7.5 0 0114.993 0 .75.75 0 101.499-.044 9.005 9.005 0 00-5.9-8.181A5.5 5.5 0 0012 2.5zM8 8a4 4 0 118 0 4 4 0 01-8 0z"></path></svg></span>
-                  {{ __('マイページへ') }}
+                  {{ __('ユーザーページ') }}
                 </a>
               </button>
             </li>
@@ -94,10 +87,10 @@
             <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M17.263 2.177a1.75 1.75 0 012.474 0l2.586 2.586a1.75 1.75 0 010 2.474L19.53 10.03l-.012.013L8.69 20.378a1.75 1.75 0 01-.699.409l-5.523 1.68a.75.75 0 01-.935-.935l1.673-5.5a1.75 1.75 0 01.466-.756L14.476 4.963l2.787-2.786zm-2.275 4.371l-10.28 9.813a.25.25 0 00-.067.108l-1.264 4.154 4.177-1.271a.25.25 0 00.1-.059l10.273-9.806-2.94-2.939zM19 8.44l2.263-2.262a.25.25 0 000-.354l-2.586-2.586a.25.25 0 00-.354 0L16.061 5.5 19 8.44z"></path></svg></span>
             相談する
           </button>
-
+        
           <!-- モーダルの設定 -->
-          <div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-labelledby="postModalLabel">
-            <div class="modal-dialog" role="document">
+          <div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-labelledby="postModalLabel" data-backdrop="static">
+            <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title" id="postModalLabel">相談内容を記入してください</h5>
@@ -113,7 +106,7 @@
                     </div>
                     <div class="form-group">
                       <label for="postModalTextarea"> <strong class="lead">本文</strong> <span class="text-muted">※300文字以内</span></label>
-                      <textarea class="form-control" id="postModalTextarea" rows="3"></textarea>
+                      <textarea class="form-control rounded-0" id="postModalTextarea" rows="10"></textarea>
                     </div>
                     <div class="">
                       <label for="postModalTag"><strong class="lead">タグを選択</strong><span class="text-muted">※タグは10個まで選択可能</span></label>
@@ -131,4 +124,4 @@
       </ul>
     </div> 
   </div>
-</header>
+</div>

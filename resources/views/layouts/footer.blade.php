@@ -1,4 +1,4 @@
-<footer class="footer bg-white shadow-sm">
+<footer class="bg-white shadow-sm">
   <div class="footer_inner">
     <div class="mx-auto" style="width: 200px">
       <a href="#">
@@ -7,21 +7,21 @@
     </div>
   </div>
   <div class="footer_inner2">
-    <div class="container-fluid ">
+    <div class="container">
       <div class="nav-scroller pc">
         <nav class="nav d-flex justify-content-between">
-          <a class="p-2 pr-5 text-muted" href="{{  url('/papa-doushi/') }}">プレミアム</a>
-          <a class="p-2 pr-5 text-muted" href="{{  url('/papa-doushi/help') }}">よくある質問・パパドウシの使い方</a>
-          <a class="p-2 pr-5 text-muted" href="{{  url('/papa-doushi/users/user-pages') }}">ユーザーページ</a>
-          <a class="p-2 pr-5 text-muted" href="{{  url('/papa-doushi/') }}">タグ一覧</a>
-          <a class="p-2 pr-5 text-muted" href="{{  url('/papa-doushi/') }}">プライバシー</a>
-          <a class="p-2 pr-5 text-muted" href="{{  url('/papa-doushi/') }}">ご利用規約</a>
-          <a class="p-2 pr-5 text-muted" href="{{  url('/papa-doushi/') }}">特商法表記</a>
-          <a class="p-2 pr-5 text-muted" href="{{  url('/papa-doushi/') }}">フィードバック</a>
-          <a class="p-2 pr-5 text-muted" href="{{  url('/papa-doushi/') }}">お問い合わせ</a>
+          <a class="mr-5 pr-5 p-2 text-muted" href="{{  url('/papa-doushi/') }}">プレミアム</a>
+          <a class="mr-5 pr-5 p-2 text-muted" href="{{  url('/papa-doushi/help') }}">よくある質問・パパドウシの使い方</a>
+          <a class="mr-5 pr-5 p-2 text-muted" href="{{  url('/papa-doushi/mypage') }}">ユーザーページ</a>
+          <a class="mr-5 pr-5 p-2 text-muted" href="{{  url('/papa-doushi/') }}">タグ一覧</a>
+          <a class="mr-5 pr-5 p-2 text-muted" href="{{  url('/papa-doushi/') }}">プライバシー</a>
+          <a class="mr-5 pr-5 p-2 text-muted" href="{{  url('/papa-doushi/') }}">ご利用規約</a>
+          <a class="mr-5 pr-5 p-2 text-muted" href="{{  url('/papa-doushi/') }}">特商法表記</a>
+          <a class="mr-5 pr-5 p-2 text-muted" href="{{  url('/papa-doushi/') }}">フィードバック</a>
+          <a class="mr-5 pr-5 p-2 text-muted" href="{{  url('/contact') }}">お問い合わせ</a>
         </nav>
       </div>
+      <p class="Copyright ">&copy; since2021, PapaDoushi, Inc.</p>
     </div>
-    <p class="Copyright ">&copy; since2021, PapaDoushi, Inc.</p>
   </div>
 </footer>

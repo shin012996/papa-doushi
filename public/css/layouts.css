@@ -1,11 +1,122 @@
 /* header */
 
-
 /* footer */
 
-
 /* index */
+.toppage {
+  padding-top: 5%;
+}
 
+/* mypage */
+.mypage {
+  padding-top: 50px;
+}
+
+
+.mypage-img {
+  position: relative;
+  width: 100%;
+  max-height: 600px;
+  overflow: hidden;
+}
+
+/* index & mypage navbar */
+
+.scroll-nav ul {
+	font-size: 0;
+	box-sizing: border-box;
+	width: 100%;
+	padding: 4px;
+	list-style: none;
+	text-align: center;
+}
+.scroll-nav li {
+	font-size: 16px;
+	margin: 0 8px;
+	display: inline-block;
+}
+.scroll-nav li a {
+	text-decoration: none;
+	padding-bottom: 3px; /* 文字と下線に隙間を作る */
+	color: #000;
+	display: block;
+}
+.scroll-nav li a:after {
+	content: '';
+	width: 0;
+	transition: all 0.3s ease;
+	border-bottom: 3px solid #000;
+	display: block;
+}
+.scroll-nav li a:hover:after {
+	width: 100%;
+	border-bottom: 3px solid #000;
+}
+
+.scroll-nav {
+  /* スクロールバーを見えなくするため */
+  height: 48px; /* 実際に表示する高さ */
+  overflow-y: hidden;
+}
+
+/* 中身がスクロールするビュー */
+.scroll-nav__view {
+  -webkit-overflow-scrolling: touch;
+  overflow-x: scroll;
+}
+
+/* 実際にスクロールするオブジェクト */
+.scroll-nav__list {
+  /* tableにすることで、横幅指定をすることなくmargin: autoによる中央寄せが可能になる */
+  display: table;
+  list-style: none;
+  margin: 0 auto;
+  /* 下方向に余分なpadding部分を持たせ、そこにスクロールバーが表示される */
+  padding: 0 0 24px 0;
+}
+
+.scroll-nav__item {
+  /* itemを横並びに、かつ親要素がその親要素の横幅からはみだすことが可能になる */
+  display: table-cell;
+}
+
+.scroll-nav a {
+  display: block;
+  padding: 12px;
+  /* 文字列の自動改行を禁止 */
+  white-space: nowrap;
+}
+
+/* 以下サンプル用デザイン */
+
+.scroll-nav {
+  background: rgb(255, 255, 255);
+}
+
+.scroll-nav a {
+  color: rgb(255, 255, 255);
+  font-family: sans-serif;
+  font-size: 14px;
+  /* 行高が24pxになるように調整 24/14 */
+  line-height: 1.71428;
+  text-decoration: none;
+}
+
+
+
+
+
+@media only screen and (min-width: 771px) { /* PCサイズでの指定 */
+.scroll-nav ul {
+  padding: 0;
+}
+.scroll-nav ul li {
+  width: 14.2%; /* メニューの個別の幅 */
+}
+.next-btn {
+  display: none; /* 右側の固定部分を非表示 */
+}
+}
 
 /* Extra small devices: Phones (<576px) */
 @media (max-width: 575px) {
