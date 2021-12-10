@@ -11,11 +11,6 @@ class PapaDoushiController extends Controller
         return view('papa-doushi.index');
     }
 
-    public function post()
-    {
-        return view('papa-doushi.post');
-    }
-
     public function help()
     {
         return view('papa-doushi.help');
@@ -26,8 +21,8 @@ class PapaDoushiController extends Controller
         return view('papa-doushi.about');
     }
 
-    public function users()
+    public function mypage()
     {
-        return view('papa-doushi.users');
+        return view('papa-doushi.mypage');
     }
 }
