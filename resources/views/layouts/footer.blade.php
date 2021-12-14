@@ -12,8 +12,9 @@
         <nav class="nav d-flex justify-content-between">
           <a class="mr-5 pr-5 p-2 text-muted" href="{{  url('/papa-doushi/') }}">プレミアム</a>
           <a class="mr-5 pr-5 p-2 text-muted" href="{{  url('/papa-doushi/help') }}">よくある質問・パパドウシの使い方</a>
-          <a class="mr-5 pr-5 p-2 text-muted" href="{{  url('/papa-doushi/mypage') }}">ユーザーページ</a>
+          <a class="mr-5 pr-5 p-2 text-muted" href="{{  url('/papa-doushi/1/show') }}">ユーザーページ</a>
           <a class="mr-5 pr-5 p-2 text-muted" href="{{  url('/papa-doushi/') }}">タグ一覧</a>
+          <a class="mr-5 pr-5 p-2 text-muted" href="{{  url('/papa-doushi/userList') }}">他のユーザー</a>
           <a class="mr-5 pr-5 p-2 text-muted" href="{{  url('/papa-doushi/') }}">プライバシー</a>
           <a class="mr-5 pr-5 p-2 text-muted" href="{{  url('/papa-doushi/') }}">ご利用規約</a>
           <a class="mr-5 pr-5 p-2 text-muted" href="{{  url('/papa-doushi/') }}">特商法表記</a>

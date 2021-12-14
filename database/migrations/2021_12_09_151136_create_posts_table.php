@@ -16,13 +16,15 @@ class CreatePostsTable extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id')->comment('ユーザID');
-            $table->string('text')->comment('本文');
+            $table->string('title')->comment('タイトル');
+            $table->string('content')->comment('本文');
+            $table->boolean('is_solved')->comment('解決済みか？');
             $table->softDeletes();
             $table->timestamps();
 
             $table->index('id');
             $table->index('user_id');
-            $table->index('text');
+            $table->index('content');
 
             $table->foreign('user_id')
                 ->references('id')

@@ -87,25 +87,26 @@
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
+                <form action="/papa-doushi/post" method="POST" name="soudan">
+                  @csrf
                 <div class="modal-body">
-                  <form>
                     <div class="form-group">
-                      <label for="postModalTitle"> <strong class="lead">タイトル</strong> <span class="text-muted">※20文字以内</span></label>
-                      <input type="text" class="form-control" id="postModalTitle">
+                      <label for="postModalTitle"> <strong class="lead">タイトル</strong> <span class="text-muted">※30文字以内</span></label>
+                      <input type="text" class="form-control" name="title" id="title">
                     </div>
                     <div class="form-group">
                       <label for="postModalTextarea"> <strong class="lead">本文</strong> <span class="text-muted">※300文字以内</span></label>
-                      <textarea class="form-control rounded-0" id="postModalTextarea" rows="10"></textarea>
+                      <textarea class="form-control rounded-0" id="content" rows="10" name="content"></textarea>
                     </div>
                     <div class="">
                       <label for="postModalTag"><strong class="lead">タグを選択</strong><span class="text-muted">※タグは10個まで選択可能</span></label>
                     </div>
-                  </form>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-                  <button type="button" class="btn btn-primary">OK</button>
-                </div><!-- /.modal-footer -->
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+                    <button type="button" class="btn btn-primary" onclick="check()">相談する</button>
+                  </div><!-- /.modal-footer -->
+                </form>
               </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
           </div><!-- /.modal -->

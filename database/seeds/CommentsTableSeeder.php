@@ -17,7 +17,7 @@ class CommentsTableSeeder extends Seeder
                 'user_id' => 1,
                 'post_id' => $i,
                 'text' => 'これはテストコメント' .$i,
-                'created_at' => mow(),
+                'created_at' => now(),
                 'updated_at' => now()
             ]);
         }
