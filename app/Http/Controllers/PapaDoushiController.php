@@ -62,7 +62,7 @@ class PapaDoushiController extends Controller
      {
          $login_user = auth()->user();
          $is_following = $login_user->isFollowing($user->id);
-         $is_following = $login_user->isFollowed($user->id);
+         $is_followed = $login_user->isFollowed($user->id);
          $timelines = $post->getUserTimeLine($user->id);
          $post_count = $post->getPostCount($user->id);
          $follow_count = $follower->getFollowCount($user->id);
@@ -81,15 +81,49 @@ class PapaDoushiController extends Controller
      }
  
      // Post編集画面
-     public function edit($id)
+     public function edit(User $user)
      {
-         //
+         return view('papa-doushi.edit', ['user' => $user]);
      }
  
      // Post編集処理
-     public function update(Request $request, $id)
+     public function update(Request $request, User $user)
      {
-         //
+         $data = $request->all();
+         $validator = Validator::make($data, [
+            'screen_name'   => ['required', 'string', 'max:50', Rule::unique('users')->ignore($user->id)],
+            'name'          => ['required', 'string', 'max:255'],
+            'profile_image' => ['file', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
+            'email'         => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)]
+         ]);
+         $validator->validate();
+         $user->updateProfile($data);
+
+         return redirect('papa-doushi/' .$user->id);
+     }
+
+     public function updateProfile(Array $params)
+     {
+         if(isset($params['profile_image'])) {
+             $file_name = $params['profile_image']->store('public/profile_image');
+
+             $this::where('id', $this->id)
+                ->update([
+                    'screen_name'   => $params['screen_name'],
+                    'name'          => $params['name'],
+                    'profile_image' => basename($file_name),
+                    'email'         => $params['email'],
+                ]);
+         } else {
+             $this::where('id', $this->id)
+                ->update([
+                    'screen_name'   => $params['screen_name'],
+                    'name'          => $params['name'],
+                    'email'         => $params['email'],
+                ]);
+         }
+
+         return;
      }
  
      // Post削除処理

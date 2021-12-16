@@ -62,8 +62,8 @@
         <div class="tab-content p-2 ">
           <div role="tabpanel" class="tab-pane active fade show" id="follow">
             <div class="row mb-2 mt-2">
-              <div class="d-hlex col-12">
-                <div class="card flex-row mb-4 shadow-sm h-md-250 col-12">
+              <div class="d-hlex col">
+                <div class="card flex-row mb-4 shadow-sm h-md-250 col">
                   <div class="col-2 pc">
                     <img src="{{ asset('img/icon/accepting.png') }}" alt="">
                     <img src="{{ asset('img/icon/numeber.png') }}" alt="">
