@@ -19,25 +19,30 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-//papa-doushi
-Route::get('/papa-doushi', 'PapaDoushiController@index'); //トップ画面
-Route::get('/papa-doushi/help', 'PapaDoushiController@help'); //ヘルプ画面
-Route::get('/papa-doushi/about', 'PapaDoushiController@about'); //アバウト画面
+//
+Route::get('/anyone/help', 'AnyonesController@help'); //ヘルプ画面
+Route::get('/anyone/about', 'AnyonesController@about'); //アバウト画面
 
 
 //ログイン状態
 Route::group(['middleware' => 'auth'], function() {
 
     // ユーザ関連
-    Route::get('/papa-doushi/userList', 'PapaDoushiController@userList'); //他のユーザ一覧
-    Route::get('/papa-doushi/create', 'PapaDoushiController@create'); //新規投稿入力画面
-    Route::post('/papa-doushi/post', 'PapaDoushiController@store'); //新規投稿処理
-    Route::get('/papa-doushi/{user}/show', 'PapaDoushiController@show'); //ユーザー詳細画面
-    Route::get('/papa-doushi/{user}/edit', 'PapaDoushiController@edit'); //投稿内容編集画面
-    Route::post('/papa-doushi/{user}', 'PapaDoushiController@update'); //投稿内容の更新処理
-    Route::delete('papa-doushi/{user}', 'PapaDoushiController@destory'); //投稿削除処理
+    Route::get('/users', 'UsersController@index'); //他のユーザ一覧
+    Route::get('/users/show/{user}', 'UsersController@show'); //ユーザー詳細画面
+    Route::get('/users/edit/{user}', 'UsersController@edit'); //プロフィール編集画面
+    Route::post('/users/{user}', 'UsersController@update'); //プロフィールの更新処理
 
     // フォロー/フォロー解除を追加
-    Route::post('papa-doushi/{user}/follow', 'PapaDoushiController@follow')->name('follow');
-    Route::delete('papa-doushi/{user}/unfollow', 'PapaDoushiController@unfollow')->name('unfollow');
+    Route::post('users/follow/{user}', 'UsersController@follow')->name('follow');
+    Route::delete('users/unfollow/{user}', 'UsersController@unfollow')->name('unfollow');
+
+    // 投稿関連
+    Route::get('/posts', 'PostsController@index'); //トップ画面 投稿内容の一覧
+    Route::get('/posts/details', 'PostsController@details')->name('posts.details'); // 投稿内容の詳細画面
+    Route::post('/posts/store', 'PostsController@store'); //新規投稿処理
+    Route::post('/posts/edit/{user}', 'PostsController@edit')->name('posts.edit'); // 投稿内容の編集
+    Route::post('/posts/update/{user}', 'PostsController@update')->name('posts.update'); // 投稿内容の更新処理
+
+
 });

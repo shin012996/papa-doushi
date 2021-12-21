@@ -20,14 +20,14 @@
                       <div class="d-flex justify-content-end flex-grow-1">
                         @if (auth()->user()->isFollowing($user->id))
                             <form action="{{ route('unfollow', ['id' => $user->id]) }}" method="POST">
-                                {{ csrf_field() }}
-                                {{ method_field('DELETE') }}
+                                @csrf
+                                @method('DELETE')
 
                                 <button type="submit" class="btn btn-danger">フォロー解除</button>
                             </form>
                         @else
                             <form action="{{ route('follow', ['id' => $user->id]) }}" method="POST">
-                                {{ csrf_field() }}
+                                @csrf
 
                                 <button type="submit" class="btn btn-primary">フォローする</button>
                             </form>

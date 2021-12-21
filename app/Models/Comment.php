@@ -22,4 +22,9 @@ class Comment extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function getComments(Int $post_id)
+    {
+        return $this->with('user')->where('post_id', $post_id)->get();
+    }
 }

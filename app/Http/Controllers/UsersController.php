@@ -9,55 +9,19 @@ use App\Models\User;
 use App\Models\Post;
 use App\Models\Follower;
 
-class PapaDoushiController extends Controller
+class UsersController extends Controller
 {
-    public function index()
-    {
-        return view('papa-doushi.index');
-    }
-
-    public function help()
-    {
-        return view('papa-doushi.help');
-    }
-
-    public function about()
-    {
-        return view('papa-doushi.about');
-    }
-
-    public function userList(User $user)
+    // 他のユーザ一覧
+    public function index(User $user)
     {
         $all_users = $user->getAllUsers(auth()->user()->id);
-        return view('papa-doushi.userList', [
+        
+        return view('users.index', [
             'all_users' => $all_users
         ]);
-
     }
  
-     // 新規Post入力画面
-     public function create()
-     {
-         //
-     }
- 
-     // 新規Post処理
-     public function store(Request $request)
-     {
-        $validatedData = $request->validate([
-            'title' => 'required|max:30',
-            'content' => 'required',
-        ]);
-         $post = new Post();
-         $post->user_id = $user = auth()->user()->id;
-         $post->title = $request->title;
-         $post->content = $request->content;
-         $post->is_solved = false;
-         $post->save();
-         return redirect('/papa-doushi');
-     }
- 
-     // ユーザ詳細画面
+     // プロフィール画面
      public function show(User $user, Post $post, Follower $follower)
      {
          $login_user = auth()->user();
@@ -69,7 +33,7 @@ class PapaDoushiController extends Controller
          $follower_count = $follower->getFollowerCount($user->id);
         
 
-         return view('papa-doushi.show', [
+         return view('users.show', [
             'user'           => $user,
             'is_following'   => $is_following,
             'is_followed'    => $is_followed,
@@ -80,13 +44,13 @@ class PapaDoushiController extends Controller
          ]);
      }
  
-     // Post編集画面
+     // プロフィール編集画面
      public function edit(User $user)
      {
-         return view('papa-doushi.edit', ['user' => $user]);
+         return view('users.edit', ['user' => $user]);
      }
  
-     // Post編集処理
+     // プロフィール編集処理
      public function update(Request $request, User $user)
      {
          $data = $request->all();
@@ -99,7 +63,7 @@ class PapaDoushiController extends Controller
          $validator->validate();
          $user->updateProfile($data);
 
-         return redirect('papa-doushi/' .$user->id);
+         return redirect('users/' .$user->id);
      }
 
      public function updateProfile(Array $params)
@@ -124,12 +88,6 @@ class PapaDoushiController extends Controller
          }
 
          return;
-     }
- 
-     // Post削除処理
-     public function destroy($id)
-     {
-         //
      }
 
      // フォロー
