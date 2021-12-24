@@ -9,7 +9,7 @@
                   <img src="{{ asset('storage/profile_image/' .$post->user->profile_image) }}" class="rounded-circle" width="50" height="50">
                   <div class="ml-2 d-flex flex-column">
                       <p class="mb-0">{{ $post->user->name }}</p>
-                      <a href="{{ url('posts/' .$post->user->id) }}" class="text-secondary">{{ $post->user->screen_name }}</a>
+                      <a href="{{ url('users/' .$post->user->id) }}" class="text-secondary">{{ $post->user->screen_name }}</a>
                   </div>
                   <div class="d-flex justify-content-end flex-grow-1">
                       <p class="mb-0 text-secondary">{{ $post->created_at->format('Y-m-d H:i') }}</p>
@@ -29,66 +29,23 @@
                                   @csrf
                                   @method('DELETE')
 
-                                  <div class="nav-item p-3">
-                                    <!-- 切り替えボタンの設定 -->
-                                    <button type="button" class="btn btn-outline-info text-dark" data-toggle="modal" data-target="#postModal"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M11.013 1.427a1.75 1.75 0 012.474 0l1.086 1.086a1.75 1.75 0 010 2.474l-8.61 8.61c-.21.21-.47.364-.756.445l-3.251.93a.75.75 0 01-.927-.928l.929-3.25a1.75 1.75 0 01.445-.758l8.61-8.61zm1.414 1.06a.25.25 0 00-.354 0L10.811 3.75l1.439 1.44 1.263-1.263a.25.25 0 000-.354l-1.086-1.086zM11.189 6.25L9.75 4.81l-6.286 6.287a.25.25 0 00-.064.108l-.558 1.953 1.953-.558a.249.249 0 00.108-.064l6.286-6.286z"></path></svg>編集</button>
+                                  <button type="button" class="dropdown-item btn btn btn-outline-info btn-block" data-toggle="modal" data-target="#postEditModal" onclick="edit({{ $timeline->id }}, '{{ $timeline->title }}', '{{ $timeline->content }}')">編集</button>
                                   
-                                    <!-- モーダルの設定 -->
-                                    <div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-labelledby="postModalLabel" data-backdrop="static">
-                                      <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
-                                        <div class="modal-content">
-                                          <div class="modal-header">
-                                            <h5 class="modal-title" id="postModalLabel">相談内容の編集</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
-                                              <span aria-hidden="true">&times;</span>
-                                            </button>
-                                          </div>                               
-                                                                    
-                                          <form action="/posts/update" method="POST" name="soudan">
-                                            @csrf
-                                            @method('PUT')
-                                  
-                                            <div class="col-md-12 p-3 w-100 d-flex"> <!-- プロフィール -->
-                                                <img src="{{ asset('storage/profile_image/' .$user->profile_image) }}" class="rounded-circle" width="50" height="50">
-                                                <div class="ml-2 d-flex flex-column">
-                                                    <p class="mb-0">{{ $user->name }}</p>
-                                                    <a href="{{ url('users/' .$user->id) }}" class="text-secondary">{{ $user->screen_name }}</a>
-                                                </div>
-                                            </div>
-                                  
-                                            <div class="modal-body">
-                                                <div class="form-group">
-                                                  <label for="postModalTitle"> <strong class="lead">タイトル</strong> <span class="text-muted">※30文字以内</span></label>
-                                                  <input type="text" class="form-control" name="title" id="title">
-                                                </div>
-                                                <div class="form-group">
-                                                  <label for="postModalTextarea"> <strong class="lead">本文</strong></label>
-                                                  <textarea class="form-control rounded-0" id="content" rows="10" name="content"></textarea>
-                                                </div>
-                                                <div class="">
-                                                  <label for="postModalTag"><strong class="lead">タグを選択</strong><span class="text-muted">※タグは10個まで選択可能</span></label>
-                                                </div>
-                                              </div>
-                                              <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-                                                <button type="button" class="btn btn-primary" onclick="check()">相談する</button>
-                                              </div><!-- /.modal-footer -->
-                                          </form>
-                                        </div><!-- /.modal-content -->
-                                      </div><!-- /.modal-dialog -->
-                                    </div><!-- /.modal -->
-                                  </div>
                                   <button type="submit" class="dropdown-item del-btn">削除</button>
                               </form>
                           </div>
                       </div>
                   @endif
                   <div class="mr-3 d-flex align-items-center">
-                      <a href="{{ url('posts/' .$post->id) }}"><i class="far fa-comment fa-fw"></i></a>
+                      <a href="{{ url('posts/' .$post->id) }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M2.75 2.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h2a.75.75 0 01.75.75v2.19l2.72-2.72a.75.75 0 01.53-.22h4.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25H2.75zM1 2.75C1 1.784 1.784 1 2.75 1h10.5c.966 0 1.75.784 1.75 1.75v7.5A1.75 1.75 0 0113.25 12H9.06l-2.573 2.573A1.457 1.457 0 014 13.543V12H2.75A1.75 1.75 0 011 10.25v-7.5z"></path></svg>
+                      </a>
                       <p class="mb-0 text-secondary">{{ count($post->comments) }}</p>
                   </div>
                   <div class="d-flex align-items-center">
-                      <button type="" class="btn p-0 border-0 text-primary"><i class="far fa-heart fa-fw"></i></button>
+                      <button type="" class="btn p-0 border-0 text-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M4.25 2.5c-1.336 0-2.75 1.164-2.75 3 0 2.15 1.58 4.144 3.365 5.682A20.565 20.565 0 008 13.393a20.561 20.561 0 003.135-2.211C12.92 9.644 14.5 7.65 14.5 5.5c0-1.836-1.414-3-2.75-3-1.373 0-2.609.986-3.029 2.456a.75.75 0 01-1.442 0C6.859 3.486 5.623 2.5 4.25 2.5zM8 14.25l-.345.666-.002-.001-.006-.003-.018-.01a7.643 7.643 0 01-.31-.17 22.075 22.075 0 01-3.434-2.414C2.045 10.731 0 8.35 0 5.5 0 2.836 2.086 1 4.25 1 5.797 1 7.153 1.802 8 3.02 8.847 1.802 10.203 1 11.75 1 13.914 1 16 2.836 16 5.5c0 2.85-2.045 5.231-3.885 6.818a22.08 22.08 0 01-3.744 2.584l-.018.01-.006.003h-.002L8 14.25zm0 0l.345.666a.752.752 0 01-.69 0L8 14.25z"></path></svg>
+                      </button>
                       <p class="mb-0 text-secondary">{{ count($post->favorites) }}</p>
                   </div>
               </div>
@@ -105,7 +62,7 @@
                           <img src="{{ asset('storage/profile_image/' .$comment->user->profile_image) }}" class="rounded-circle" width="50" height="50">
                           <div class="ml-2 d-flex flex-column">
                               <p class="mb-0">{{ $comment->user->name }}</p>
-                              <a href="{{ url('papa-doushi/' .$comment->user->id) }}" class="text-secondary">{{ $comment->user->screen_name }}</a>
+                              <a href="{{ url('users/' .$comment->user->id) }}" class="text-secondary">{{ $comment->user->screen_name }}</a>
                           </div>
                           <div class="d-flex justify-content-end flex-grow-1">
                               <p class="mb-0 text-secondary">{{ $comment->created_at->format('Y-m-d H:i') }}</p>
@@ -120,8 +77,88 @@
                       <p class="mb-0 text-secondary">コメントはまだありません。</p>
                   </li>
               @endforelse
+              <li class="list-group-item">
+                    <div class="py-3">
+                        <form method="POST" action="{{ route('comments.store') }}">
+                            @csrf
+
+                            <div class="form-group row mb-0">
+                                <div class="col-md-12 p-3 w-100 d-flex">
+                                    <img src="{{ asset('storage/profile_image/' .$user->profile_image) }}" class="rounded-circle" width="50" height="50">
+                                    <div class="ml-2 d-flex flex-column">
+                                        <p class="mb-0">{{ $user->name }}</p>
+                                        <a href="{{ yrl('users/' .$user->id) }}" class="text-seconsary">{{ $user->screen_name }}</a>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <input type="hidden" name="post_id" value="{{ $post->id }}">
+                                    <textarea class="form-control @error('text') is-invalid @enderror" name="text" required autocomplete="text" rows="4">{{ old('text') }}</textarea>
+                                    
+                                    @error('text')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row mb-0">
+                                <div class="col-md-12 text-right">
+                                    <button type="submit" class="btn btn-primary">
+                                        返信
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+              </li>
           </ul>
       </div>
   </div>
+
+  <!-- モーダルの設定 -->
+  <div class="modal fade" id="postEditModal" tabindex="-1" role="dialog" aria-labelledby="postModalLabel" data-backdrop="static">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="postModalLabel">相談内容の編集</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>                                                                                  
+
+        <form action="/posts/post/update" method="POST" name="hensyu">
+          @csrf
+          @method('PUT')
+
+          <div class="col-md-12 p-3 w-100 d-flex"> <!-- プロフィール -->
+              <img src="{{ asset('storage/profile_image/' .$user->profile_image) }}" class="rounded-circle" width="50" height="50">
+              <div class="ml-2 d-flex flex-column">
+                  <p class="mb-0">{{ $user->name }}</p>
+                  <a href="{{ url('users/' .$user->id) }}" class="text-secondary">{{ $user->screen_name }}</a>
+              </div>
+          </div>
+
+          <div class="modal-body">
+              <div class="form-group">
+                <label for="editTitle"> <strong class="lead">タイトル</strong> <span class="text-muted">※30文字以内</span></label>
+                <input type="text" class="form-control" name="title" id="editTitle">
+              </div>
+              <div class="form-group">
+                <label for="editContent"> <strong class="lead">本文</strong></label>
+                <textarea class="form-control rounded-0" id="editContent" rows="10" name="content"></textarea>
+              </div>
+              <div class="">
+                <label for="postModalTag"><strong class="lead">タグを選択</strong><span class="text-muted">※タグは10個まで選択可能</span></label>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+              <button type="button" class="btn btn-primary" onclick="check()">相談する</button>
+            </div><!-- /.modal-footer -->
+        </form>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
 </div>
 @endsection

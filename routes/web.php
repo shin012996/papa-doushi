@@ -20,8 +20,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 //
-Route::get('/anyone/help', 'AnyonesController@help'); //ヘルプ画面
-Route::get('/anyone/about', 'AnyonesController@about'); //アバウト画面
+Route::get('/anyone/help', 'AnyonesController@help')->name('anyone.about'); //ヘルプ画面
+Route::get('/anyone/about', 'AnyonesController@about')->name('anyone.help'); //アバウト画面
 
 
 //ログイン状態
@@ -39,10 +39,11 @@ Route::group(['middleware' => 'auth'], function() {
 
     // 投稿関連
     Route::get('/posts', 'PostsController@index'); //トップ画面 投稿内容の一覧
-    Route::get('/posts/details', 'PostsController@details')->name('posts.details'); // 投稿内容の詳細画面
+    Route::get('/posts/details/{post}', 'PostsController@details')->name('posts.details'); // 投稿内容の詳細画面
     Route::post('/posts/store', 'PostsController@store'); //新規投稿処理
-    Route::post('/posts/edit/{user}', 'PostsController@edit')->name('posts.edit'); // 投稿内容の編集
-    Route::post('/posts/update/{user}', 'PostsController@update')->name('posts.update'); // 投稿内容の更新処理
+    Route::post('/posts/edit/{post}', 'PostsController@edit')->name('posts.edit'); // 投稿内容の編集
+    Route::post('/posts/update/{post}', 'PostsController@update')->name('posts.update'); // 投稿内容の更新処理
 
-
+    // コメント機能
+    Route::post('/comments', 'CommentsController@store')->name('comments.store');
 });

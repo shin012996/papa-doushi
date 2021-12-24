@@ -23,8 +23,19 @@ class Comment extends Model
         return $this->belongsTo(User::class);
     }
 
+    // 詳細画面 posts/details.blade.php
     public function getComments(Int $post_id)
     {
         return $this->with('user')->where('post_id', $post_id)->get();
+    }
+
+    public function commentStore(Int $user_id, Array $data)
+    {
+        $this->user_id = $user_id;
+        $this->post_id = $post_id;
+        $this->content = $content;
+        $this->save();
+
+        return;
     }
 }

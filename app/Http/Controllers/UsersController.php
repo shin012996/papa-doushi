@@ -8,6 +8,8 @@ use Illuminate\Validation\Rule;
 use App\Models\User;
 use App\Models\Post;
 use App\Models\Follower;
+use App\Models\Favorite;
+use App\Models\Comment;
 
 class UsersController extends Controller
 {

@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use App\Models\User;
 use App\Models\Post;
 use App\Models\Follower;
+use App\Models\Favorite;
+use App\Models\Comment;
 
 class PostsController extends Controller
 {
@@ -25,16 +29,24 @@ class PostsController extends Controller
     }
 
     // 投稿の詳細画面
-    public function details(Post $post, Comment $comment)
+    public function details(Post $post, Comment $comment, Follower $follower)
     {
         $user = auth()->user();
-        $post = $post->getpost($post->id);
+        $post = $post->getPost($post->id);
         $comments = $comment->getComments($post->id);
+
+        $follow_ids = $follower->followingIds($user->id);
+        // followed_idだけ抜き出す
+        $following_ids = $follow_ids->pluck('followed_id')->toArray();
+
+        $timelines = $post->getTimelines($user->id, $following_ids);
 
         return view('posts.details', [
             'user'     => $user,
             'post' => $post,
-            'comments' => $comments
+            'comments' => $comments,
+            'timelines' => $timelines
+            
         ]);
     }
 
