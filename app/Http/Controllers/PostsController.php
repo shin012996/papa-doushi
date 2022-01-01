@@ -39,13 +39,14 @@ class PostsController extends Controller
         // followed_idだけ抜き出す
         $following_ids = $follow_ids->pluck('followed_id')->toArray();
 
-        $timelines = $post->getTimelines($user->id, $following_ids);
+        // $timelines = $post->getTimelines($user->id, $following_ids);
 
         return view('posts.details', [
             'user'     => $user,
             'post' => $post,
-            'comments' => $comments,
-            'timelines' => $timelines
+            'comments' => $comments
+            // 'timelines' => $timelines,
+            // 'timeline' => $timeline
             
         ]);
     }
@@ -63,6 +64,7 @@ class PostsController extends Controller
         $post->content = $request->content;
         $post->is_solved = false;
         $post->save();
+        // $post->;
         return redirect('/posts');
     }
 

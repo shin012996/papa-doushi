@@ -12,9 +12,7 @@
         <nav class="nav d-flex justify-content-between">
           <a class="mr-5 pr-5 p-2 text-muted" href="{{  url('/anyone/') }}">プレミアム</a>
           <a class="mr-5 pr-5 p-2 text-muted" href="{{  url('/anyone/help') }}">よくある質問・パパドウシの使い方</a>
-
           <a class="mr-5 pr-5 p-2 text-muted" href="{{  url('/anyone/') }}">タグ一覧</a>
-          <a class="mr-5 pr-5 p-2 text-muted" href="{{  url('/users/index') }}">他のユーザー</a>
          <!-- <a class="mr-5 pr-5 p-2 text-muted" href="{{  url('/anyone/') }}">プライバシー</a>
           <a class="mr-5 pr-5 p-2 text-muted" href="{{  url('/anyone/') }}">ご利用規約</a>
           <a class="mr-5 pr-5 p-2 text-muted" href="{{  url('/anyone/') }}">特商法表記</a>

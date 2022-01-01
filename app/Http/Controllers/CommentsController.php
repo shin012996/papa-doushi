@@ -19,7 +19,7 @@ class CommentsController extends Controller
        $data = $request->all();
        $validator = Validator::make($data, [
            'post_id' => ['required', 'integer'],
-           'content' => ['required', 'string']
+           'text' => ['required', 'string']
        ]);
 
        $validator->validate();
