@@ -1,6 +1,17 @@
 @extends('layouts/app')
 @section('content')
 @section('title', 'パパドウシ | 育児に向き合うパパ達のQ&Aサイト')
+<div class="scroll-nav container-fluid col border-bottom border-secondary p-0">
+  <div class="scroll-nav__view col col-md-4 p-0">
+    <ul class="scroll-nav__list">
+      <li><a class="scroll-nav__item text-muted font-weight-bold" href="#">ホーム</a></li>
+      <li><a class="scroll-nav__item text-muted font-weight-bold" href="#">新着</a></li>
+      <li><a class="scroll-nav__item text-muted font-weight-bold" href="#">未回答</a></li>
+      <li><a class="scroll-nav__item text-muted font-weight-bold" href="#">未解決</a></li>
+      <li><a class="scroll-nav__item text-muted font-weight-bold" href="#">解決済</a></li>
+    </ul>
+  </div>
+</div>
 <div class="container">
   <div class="row justify-content-center">
       <div class="col-md-8 mb-3 text-right">
@@ -175,8 +186,9 @@
                 <label for="editContent"> <strong class="lead">本文</strong></label>
                 <textarea class="form-control rounded-0" id="editContent" rows="10" name="content"></textarea>
               </div>
-              <div class="">
-                <label for="postModalTag"><strong class="lead">タグを選択</strong><span class="text-muted">※タグは10個まで選択可能</span></label>
+              <div class="form-group">
+                <label for="editTag"><strong class="lead">タグを選択</strong><span class="text-muted">※タグは10個まで選択可能</span></label>
+                <input type="text" class="form-control{{ $errors->has('editTag') ? 'is-invalid' : '' }}" id="editTag" name="editTag" value="{{ old('editTag') }}" >
               </div>
             </div>
             <div class="modal-footer">

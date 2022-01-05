@@ -172,8 +172,9 @@
                       <label for="postModalTextarea"><strong class="lead">本文</strong></label>
                       <textarea class="form-control rounded-0" id="content" rows="10" name="content"></textarea>
                     </div>
-                    <div class="">
-                      <label for="postModalTag"><strong class="lead">タグを選択</strong><span class="text-muted">※タグは10個まで選択可能</span></label>
+                    <div class="form-group">
+                      <label for="postModalTags"><strong class="lead">タグを選択</strong><span class="text-muted">※タグは10個まで選択可能</span></label>
+                      <input type="text" class="form-control{{ $errors->has('tags') ? 'is-invalid' : '' }}" id="tags" name="tags" value="{{ old('tags') }}" >
                     </div>
                   </div>
                   <div class="modal-footer">
