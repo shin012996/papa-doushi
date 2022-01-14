@@ -8,9 +8,8 @@
         <div class="card-header">プロフィールの更新</div>
 
         <div class="card-body">
-          <form method="POST" action="{{ url('users/' .$user->id) }}" enctype="multipart/form-data">
+          <form method="POST" action="{{ url('users/update/' .$user->id) }}" enctype="multipart/form-data">
               @csrf
-              @method('PUT')
 
               <div class="form-group row align-items-center">
                 <label for="profile_image" class="col-md-4 col-form-label text-md-right">{{ __('Profile Image') }}</label>

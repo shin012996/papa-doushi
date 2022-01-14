@@ -29,9 +29,9 @@ Route::group(['middleware' => 'auth'], function() {
 
     // ユーザ関連
     Route::get('/users', 'UsersController@index'); //他のユーザ一覧
-    Route::get('/users/show/{user}', 'UsersController@show'); //ユーザー詳細画面
-    Route::get('/users/edit/{user}', 'UsersController@edit'); //プロフィール編集画面
-    Route::post('/users/{user}', 'UsersController@update'); //プロフィールの更新処理
+    Route::get('/users/show/{user}', 'UsersController@show')->name('users.show'); //ユーザー詳細画面
+    Route::get('/users/edit/{user}', 'UsersController@edit')->name('users.edit'); //プロフィール編集画面
+    Route::post('/users/update/{user}', 'UsersController@update'); //プロフィールの更新処理
 
     // フォロー/フォロー解除を追加
     Route::post('users/follow/{user}', 'UsersController@follow')->name('follow');
@@ -49,4 +49,7 @@ Route::group(['middleware' => 'auth'], function() {
 
     // いいね関連
     Route::resource('favorites', 'FavoritesController', ['only' => ['store', 'destroy']]);
+
+    // 解決したどうか is_solved
+    Route::resource('solutions', 'SolutionsController', ['only' => ['store', 'destroy']]);
 });

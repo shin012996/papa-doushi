@@ -65,7 +65,7 @@ class UsersController extends Controller
          $validator->validate();
          $user->updateProfile($data);
 
-         return redirect('users/' .$user->id);
+         return redirect('users/show/' .$user->id);
      }
 
      // フォロー

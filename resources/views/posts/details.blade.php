@@ -8,7 +8,6 @@
               <div class="card-haeder p-3 w-100 d-flex">
                   <img src="{{ asset('storage/profile_image/' .$post->user->profile_image) }}" class="rounded-circle" width="50" height="50">
                   <div class="ml-2 d-flex flex-column">
-                      <p class="mb-0">{{ $post->user->name }}</p>
                       <a href="{{ url('users/show/' .$post->user->id) }}" class="text-secondary">{{ $post->user->screen_name }}</a>
                   </div>
                   <div class="d-flex justify-content-end flex-grow-1">
@@ -27,7 +26,7 @@
                   @if ($post->user->id === Auth::user()->id)
                       <div class="dropdown mr-3 d-flex align-items-center">
                           <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path d="M8 9a1.5 1.5 0 100-3 1.5 1.5 0 000 3zM1.5 9a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm13 0a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path></svg></span>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
                           </a>
                           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                               <form method="POST" action="{{ url('posts/' .$post->id) }}" class="mb-0">
@@ -41,18 +40,12 @@
                           </div>
                       </div>
                   @endif
-                  <div class="mr-3 d-flex align-items-center">
-                      <a href="{{ url('posts/' .$post->id) }}">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M2.75 2.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h2a.75.75 0 01.75.75v2.19l2.72-2.72a.75.75 0 01.53-.22h4.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25H2.75zM1 2.75C1 1.784 1.784 1 2.75 1h10.5c.966 0 1.75.784 1.75 1.75v7.5A1.75 1.75 0 0113.25 12H9.06l-2.573 2.573A1.457 1.457 0 014 13.543V12H2.75A1.75 1.75 0 011 10.25v-7.5z"></path></svg>
-                      </a>
-                      <p class="mb-0 text-secondary">{{ count($post->comments) }}</p>
-                  </div>
                   <div class="d-flex align-items-center">
                       @if (!in_array($user->id, array_column($post->favorites->toArray(), 'user_id'), TRUE))
                         <form method="POST" action="{{ url('favorites/') }}" class="mb-0">
                             @csrf
 
-                            <button type="submit" class="btn p-0 border-0">
+                            <button type="submit" class="btn p-0 border-0 bg-white">
                               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M4.25 2.5c-1.336 0-2.75 1.164-2.75 3 0 2.15 1.58 4.144 3.365 5.682A20.565 20.565 0 008 13.393a20.561 20.561 0 003.135-2.211C12.92 9.644 14.5 7.65 14.5 5.5c0-1.836-1.414-3-2.75-3-1.373 0-2.609.986-3.029 2.456a.75.75 0 01-1.442 0C6.859 3.486 5.623 2.5 4.25 2.5zM8 14.25l-.345.666-.002-.001-.006-.003-.018-.01a7.643 7.643 0 01-.31-.17 22.075 22.075 0 01-3.434-2.414C2.045 10.731 0 8.35 0 5.5 0 2.836 2.086 1 4.25 1 5.797 1 7.153 1.802 8 3.02 8.847 1.802 10.203 1 11.75 1 13.914 1 16 2.836 16 5.5c0 2.85-2.045 5.231-3.885 6.818a22.08 22.08 0 01-3.744 2.584l-.018.01-.006.003h-.002L8 14.25zm0 0l.345.666a.752.752 0 01-.69 0L8 14.25z"></path></svg>
                             </button>
                         </form>

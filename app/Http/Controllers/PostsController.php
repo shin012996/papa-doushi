@@ -24,6 +24,9 @@ class PostsController extends Controller
         $following_ids = $follow_ids->pluck('followed_id')->toArray();
 
         $timelines = $post->getTimelines($user->id, $following_ids);
+        // \dd($timelines);
+
+
 
         return view('posts.index', [
             'user'      => $user,
@@ -32,35 +35,31 @@ class PostsController extends Controller
     }
 
     // 投稿の詳細画面
-    public function details(Post $post, Comment $comment, Follower $follower)
+    public function details(Post $post, Comment $comment)
     {
         $user = auth()->user();
         $post = $post->getPost($post->id);
         $comments = $comment->getComments($post->id);
 
-        $follow_ids = $follower->followingIds($user->id);
-        // followed_idだけ抜き出す
-        $following_ids = $follow_ids->pluck('followed_id')->toArray();
-
-        // $timelines = $post->getTimelines($user->id, $following_ids);
-
         return view('posts.details', [
             'user'     => $user,
             'post' => $post,
             'comments' => $comments
-            // 'timelines' => $timelines,
-            // 'timeline' => $timeline
             
         ]);
     }
 
     // モーダルの投稿機能
-    public function store(Request $request, User $user)
+    public function store(Request $request, Post $post)
     {
-       $validatedData = $request->validate([
-           'title' => 'required|max:50',
-           'content' => 'required|max:2000',
-       ]);
+        $user = auth()->user();
+        $data = $request->all();
+
+        $validator = Validator::make($data, [
+            'title' => ['required', 'string', 'max:100'],
+            'content' => ['required', 'string', 'max:2000']
+        ]);
+        $validator->validate();
 
        $tags = [];
        $record = Tag::firstOrCreate(['name' => $request->tags]);
@@ -86,7 +85,7 @@ class PostsController extends Controller
     public function edit(Post $post)
     {
         $user = auth()->user();
-        $posts = $posts->getEditPost($user->id, $post->id);
+        $posts = $post->getEditPost($user->id, $post->id);
 
         if (!isset($posts)) {
             return redirect('posts');
