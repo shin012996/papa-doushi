@@ -2,41 +2,35 @@
 @section('content')
 @section('title', '相談内容の詳細 | 育児に向き合うパパ達のQ&Aサイト')
 <div class="container">
-  <div class="row justify-content-center mb-5">
-      <div class="col-md-8 mb-3">
-          <div class="card">
-              <div class="card-haeder p-3 w-100 d-flex">
-                  <img src="{{ asset('storage/profile_image/' .$post->user->profile_image) }}" class="rounded-circle" width="50" height="50">
-                  <div class="ml-2 d-flex flex-column">
-                      <a href="{{ url('users/show/' .$post->user->id) }}" class="text-secondary">{{ $post->user->screen_name }}</a>
-                  </div>
-                  {{-- <div class="d-flex justify-content-between flex-grow-1">
-                    <div class="d-flex align-items-center">
-                        @if (!in_array($user->id, array_column($post->is_solved->toArray(), 'user_id'), TRUE))
-                          <form method="POST" action="{{ url('solutions/') }}" class="mb-0">
-                              @csrf
-  
-                              <input type="hidden" name="post_id" value="{{ $post->id }}">
-
-                          </form>
-                      @else
-                          <form method="POST" action="{{ url('solutions/' .array_column($post->is_solved->toArray(), 'id', 'user_id')[$user->id]) }}" class="mb-0">
-                              @csrf
-                              @method('DELETE')
-  
-
-                          </form>
-                      @endif
-                      <p class="mb-0 text-secondary">{{ count($post->favorites) }}</p>
+    <div class="row justify-content-center mb-5">
+        <div class="col-md-8 mb-3">
+            <div class="card">
+                <div class="card-haeder p-3 w-100 d-flex">
+                    <img src="{{ asset('storage/profile_image/' .$post->user->profile_image) }}" class="rounded-circle" width="50" height="50">
+                    <div class="ml-2 d-flex flex-column">
+                        <a href="{{ url('users/show/' .$post->user->id) }}" class="text-secondary">{{ $post->user->screen_name }}</a>
                     </div>
-                      @if($post->is_solved == 0)
-                      <button type="submit" class="btn btn-sm btn-danger ml-5">解決済{{ $post->is_solved }}</button>
-                      @else
-                      <button type="submit" class="btn btn-sm btn-secondary ml-5">未解決{{ $post->is_solved }}</button>
-                      @endif
-                      <p class="mb-0 text-secondary">{{ $post->created_at->format('Y-m-d H:i') }}</p>
-                  </div> --}}
-              </div>
+                    <div class="d-flex justify-content-between">
+                        @if ($post->user->id === Auth::user()->id)
+                            @if($post->is_solved == false)
+                            <form method="POST" action="{{ url('posts/update/' .$post->id) }}">
+                                @csrf
+
+                                <button type="submit" class="btn btn-sm btn-danger ml-5">解決</button>
+                            </form>
+                            @else
+                            <form method="POST" action="{{ url('posts/update/' .$post->id) }}">
+                                @csrf
+
+                                <button type="submit" name="notSolved" class="btn btn-sm btn-secondary ml-5">未解決</button>
+                            </form>
+                            @endif
+                        @endif
+                    </div>
+                    <div class="d-flex justify-content-end flex-grow-1">
+                        <p class="mb-0 text-secondary">{{ $post->created_at->format('Y-m-d H:i') }}</p>
+                    </div>
+                </div>
               <div class="card-body">
                   <div class="card-title">
                       <h3>{!! nl2br(e($post->title)) !!}</h3>

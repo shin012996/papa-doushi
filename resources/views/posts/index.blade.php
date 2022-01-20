@@ -53,7 +53,6 @@
                       <div class="questionList-right col-2 p-0 pl-2">
                         <div class="p-3">
                           @if ($timeline->is_solved == 0)
-                          <form action=""></form>
                           <button class="is_solved-lavel btn-lg btn-secondary" disabled><strong>受付中</strong></button>
                           @else
                           <button class="is_solved-lavel btn-lg btn-danger" disabled><strong>解決済</strong></button>
@@ -180,15 +179,15 @@
 
         <div class="modal-body">
             <div class="form-group">
-              <label for="editTitle"> <strong class="lead">タイトル</strong> <span class="text-muted">※30文字以内</span></label>
-              <input type="text" class="form-control" name="title" id="editTitle">
+              <label for="editTitle"> <strong class="lead">タイトル</strong></label>
+              <input type="text" class="form-control" id="editTitle" name="title">
             </div>
             <div class="form-group">
               <label for="editContent"> <strong class="lead">本文</strong></label>
               <textarea class="form-control rounded-0" id="editContent" rows="10" name="content"></textarea>
             </div>
             <div class="form-group">
-              <label for="editTag"><strong class="lead">タグを選択</strong><span class="text-muted">※タグは10個まで選択可能</span></label>
+              <label for="editTag"><strong class="lead">タグを選択</strong></label>
               <input type="text" class="form-control{{ $errors->has('editTag') ? 'is-invalid' : '' }}" id="editTag" name="editTag" value="{{ old('editTag') }}" >
             </div>
           </div>

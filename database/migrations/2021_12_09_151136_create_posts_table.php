@@ -18,6 +18,7 @@ class CreatePostsTable extends Migration
             $table->unsignedInteger('user_id')->comment('ユーザID');
             $table->string('title')->comment('タイトル');
             $table->string('content')->comment('本文');
+            $table->unsignedInteger('comment_count')->comment('コメント数のカウント');
             $table->boolean('is_solved')->comment('解決済みか？');
             $table->softDeletes();
             $table->timestamps();

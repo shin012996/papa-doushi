@@ -16,21 +16,30 @@ use App\Models\Comment;
 
 class PostsController extends Controller
 {
-    public function index(Post $post, Follower $follower)
+    public function index(Post $post, Follower $follower, Request $request)
     {
+        $category = $request->category ?: 'new';
+        
         $user = auth()->user();
-        $follow_ids = $follower->followingIds($user->id);
-        // followed_idだけ抜き出す
-        $following_ids = $follow_ids->pluck('followed_id')->toArray();
-
-        $timelines = $post->getTimelines($user->id, $following_ids);
-        // \dd($timelines);
-
-
+        if($category == 'new') {
+            $timelines = $post->getTimeLinesByNew();
+        } elseif($category == 'follow') {
+            $follow_ids = $follower->followingIds($user->id);
+            // followed_idだけ抜き出す
+            $following_ids = $follow_ids->pluck('followed_id')->toArray();
+            $timelines = $post->getTimelinesByFollow($user->id, $following_ids);
+        } elseif($category == 'unanswered') {
+            $timelines = $post->getTimelinesByUnAnswered($post->id);
+        } elseif($category == 'unresolved') {
+            $timelines = $post->getTimelinesByUnSolved();
+        } elseif($category == 'solved') {
+            $timelines = $post->getTimelinesBySolved();
+        }
 
         return view('posts.index', [
             'user'      => $user,
-            'timelines' => $timelines
+            'timelines' => $timelines,
+            'category' => $category,
         ]);
     }
 
@@ -69,13 +78,15 @@ class PostsController extends Controller
         foreach ($tags as $tag) {
             array_push($tags_id, $tag['id']);
         };
-        // dd($tags_id);
+
+
         
         $post = new Post();
         $post->user_id = $user = auth()->user()->id;
         $post->title = $request->title;
         $post->content = $request->content;
-        $post->is_solved = false;
+        $post->comment_count = 0;
+        $post->is_solved = 0;
         $post->save();
         $post->tags()->attach($tags_id);
         return redirect('/posts');
@@ -98,8 +109,16 @@ class PostsController extends Controller
     }
 
     // 投稿更新処理
-    public function update()
+    public function update(Post $post)
     {
+        $post = Post::find($post->id);
+        if($post->is_solved == false){
+            $post->is_solved++;
+        } else {
+            $post->is_solved--;
+        };
+        $post->save();
 
+        return back();
     }
 }

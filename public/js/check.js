@@ -17,10 +17,11 @@ function check() {
   document.soudan.submit();
 }
 
-function edit(id, title, content) {
+function edit(id, title, content, tags) {
   
   document.getElementById("editTitle").value = title;
-  document.getElementById("editTitle").value = content;
+  document.getElementById("editContent").value = content;
+  document.getElementById("editTags").value = tags;
   document.hensyu.action = '/papa-doushi/post/update/' + id;
 
 }
@@ -36,8 +37,8 @@ function editCheck() {
     alert('本文が入力されておりません。');
     return;
   }
-  const editTag = document.getElementById("editTag").value;
-  if(editTag.length == 0) {
+  const editTags = document.getElementById("editTags").value;
+  if(editTags.length == 0) {
     alert('タグを選択してください');
     return;
   }
