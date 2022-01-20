@@ -61,16 +61,11 @@
 	display: none;
 }
 /* カテゴリー */
-.cp_qa #cp_content1,
-.cp_qa #cp_content2,
-.cp_qa #cp_content3,
-.cp_qa #cp_content4,
-.cp_qa #cp_content5 {
-	display: none;
+.cp_qa #cp_content {
 	padding: 20px 0 0;
 	border-top: 1px solid #dddddd;
 }
-.cp_qa label.cp_tabitem {
+.cp_qa .cp_tabitem {
 	display: inline-block;
 	margin: 0 0 -1px;
 	padding: 15px 25px;
@@ -78,58 +73,50 @@
 	color: #bbbbbb;
 	border: 1px solid transparent;
 }
-.cp_qa label.cp_tabitem:before {
+.cp_qa .cp_tabitem:before {
 	margin-right: 10px;
 }
-.cp_qa label.cp_tabitem:hover {
+.cp_qa .cp_tabitem:hover {
 	cursor: pointer;
 	color: #888888;
 }
-.cp_qa input:checked + label {
+.cp_qa input:checked + a {
 	color: #555555;
 	border: 1px solid #dddddd;
 	border-bottom: 1px solid #ffffff;
 }
 /* --ブロックのバーの色 */
-.cp_qa input:checked + label[for*='1'] {
+.cp_qa input:checked + a[for*='1'] {
 	border-top: 5px solid #00BCD4;
 }
-.cp_qa input:checked + label[for*='2'] {
+.cp_qa input:checked + a[for*='2'] {
 	border-top: 5px solid #FF5722;
 }
-.cp_qa input:checked + label[for*='3'] {
+.cp_qa input:checked + a[for*='3'] {
 	border-top: 5px solid #03A9F4;
 }
-.cp_qa input:checked + label[for*='4'] {
-	border-top: 5px solid #E91E63;
+.cp_qa input:checked + a[for*='4'] {
+	border-top: 5px solid #2db62d;
 }
-.cp_qa input:checked + label[for*='5'] {
+.cp_qa input:checked + a[for*='5'] {
 	border-top: 5px solid #000000;
 }
 @media screen and (max-width: 650px) {
-	.cp_qa label.cp_tabitem {
+	.cp_qa a.cp_tabitem {
 		font-size: 0;
 	}
-	label:before {
+	a:before {
 		font-size: 18px;
 		margin: 0;
 	}
 }
 @media screen and (max-width: 400px) {
-	.cp_qa label.cp_tabitem {
+	.cp_qa a.cp_tabitem {
 		padding: 15px;
 	}
-	.cp_qa label.cp_tabitem:before {
+	.cp_qa a.cp_tabitem:before {
 		margin-right: 0px;
 	}
-}
-/* QAブロック */
-.cp_qa #cp_conttab1:checked ~ #cp_content1,
-.cp_qa #cp_conttab2:checked ~ #cp_content2,
-.cp_qa #cp_conttab3:checked ~ #cp_content3,
-.cp_qa #cp_conttab4:checked ~ #cp_content4,
-.cp_qa #cp_conttab5:checked ~ #cp_content5 {
-  display: block;
 }
 .cp_qa .cp_qain {
 	overflow-x: hidden;
@@ -157,6 +144,11 @@
 
 .is_solved-lavel {
   font-size: medium; 
+}
+
+/* posts.details */
+.details-text {
+  line-height: 30px;
 }
 
 @media only screen and (min-width: 771px) { /* PCサイズでの指定 */
