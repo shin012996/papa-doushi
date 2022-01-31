@@ -43,17 +43,17 @@
                   @if ($post->user->id === Auth::user()->id)
                       <div class="dropdown mr-3 d-flex align-items-center">
                           <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                            <i class="fas fa-ellipsis-v"></i>
                           </a>
                           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                              <form method="POST" action="{{ url('posts/' .$post->id) }}" class="mb-0">
-                                  @csrf
-                                  @method('DELETE')
+                              <button type="button" class="dropdown-item btn btn btn-outline-info btn-block" data-toggle="modal" data-target="#postEditModal" onclick="edit('{{ $post->id }}', '{{ $post->title }}', '{{ $post->content }}')">編集</button>
 
-                                  <button type="button" class="dropdown-item btn btn btn-outline-info btn-block" data-toggle="modal" data-target="#postEditModal" onclick="edit({{ $post->id }}, '{{ $post->title }}', '{{ $post->content }}')">編集</button>
-                                  
-                                  <button type="submit" class="dropdown-item del-btn">削除</button>
-                              </form>
+                                <form method="POST" action="{{ url('posts/destroy/' .$post->id) }}" class="mb-0" id="form_{{ $post->id }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    
+                                    <button type="submit" class="dropdown-item btn-block" onclick="deletePost(this);">削除</button>
+                                </form>
                           </div>
                       </div>
                   @endif
@@ -64,7 +64,7 @@
 
                             <input type="hidden" name="post_id" value="{{ $post->id }}">
                             <button class="btn p-0 border-0 bg-white text-primary">
-                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M4.25 2.5c-1.336 0-2.75 1.164-2.75 3 0 2.15 1.58 4.144 3.365 5.682A20.565 20.565 0 008 13.393a20.561 20.561 0 003.135-2.211C12.92 9.644 14.5 7.65 14.5 5.5c0-1.836-1.414-3-2.75-3-1.373 0-2.609.986-3.029 2.456a.75.75 0 01-1.442 0C6.859 3.486 5.623 2.5 4.25 2.5zM8 14.25l-.345.666-.002-.001-.006-.003-.018-.01a7.643 7.643 0 01-.31-.17 22.075 22.075 0 01-3.434-2.414C2.045 10.731 0 8.35 0 5.5 0 2.836 2.086 1 4.25 1 5.797 1 7.153 1.802 8 3.02 8.847 1.802 10.203 1 11.75 1 13.914 1 16 2.836 16 5.5c0 2.85-2.045 5.231-3.885 6.818a22.08 22.08 0 01-3.744 2.584l-.018.01-.006.003h-.002L8 14.25zm0 0l.345.666a.752.752 0 01-.69 0L8 14.25z"></path></svg>
+                                <i class="far fa-heart"></i>
                             </button>
                         </form>
                     @else
@@ -73,22 +73,7 @@
                             @method('DELETE')
 
                             <button type="submit" class="btn p-0 border-0 bg-white text-danger">
-                                <svg version="1.1" id="_x31_0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="width: 16px; height: 16px; opacity: 1;" xml:space="preserve">
-                                    <style type="text/css">
-                                        .st0{fill:#374149;}
-                                    </style>
-                                    <g>
-                                        <path class="st0" d="M248.787,476.68c1.654,2.676,4.334,4.253,7.246,4.253c2.838,0,5.514-1.577,7.168-4.253
-                                            c14.729-24.731,55.207-58.203,102.07-97.033c18.901-15.67,38.514-31.818,57.807-48.593
-                                            c76.474-66.552,105.538-143.972,79.703-212.408c-19.135-50.801-66.786-87.58-113.41-87.58h-0.392
-                                            c-70.198,0.3-115.895,48.058-131.262,66.286c-0.688,0.8-1.407,1.631-2.018,2.362c-12.622-16.09-59.318-68.333-132.686-68.648
-                                            h-0.315c-46.705,0-94.352,36.779-113.491,87.58c-25.831,68.436,3.307,145.856,79.704,212.408
-                                            c19.294,16.774,38.906,32.922,57.807,48.593C193.58,418.477,234.059,451.949,248.787,476.68z M74.451,208.557
-                                            c-2.711,5.753-5.288,11.598-7.572,17.632c-16.802-30.915-20.324-61.353-9.868-89.272c12.759-34.184,40.167-52.77,65.606-54.658
-                                            c19.87-1.511,37.168,5.568,51.343,13.71c0.154,0.092,0.315,0.177,0.469,0.269c0.511,0.296,0.985,0.6,1.488,0.896
-                                            c1.412,0.862,2.796,1.723,4.115,2.573c-18.005,9.053-35.068,20.532-50.643,34.53C105.646,155.576,87.361,180.876,74.451,208.557z" style="fill: rgb(223, 86, 86);"></path>
-                                    </g>
-                                    </svg>
+                                <i class="fas fa-heart"></i>
                             </button>
                         </form>
                     @endif
@@ -185,15 +170,16 @@
 
           <div class="modal-body">
               <div class="form-group">
-                <label for="editTitle"> <strong class="lead">タイトル</strong> <span class="text-muted">※30文字以内</span></label>
+                <label for="editTitle"> <strong class="lead">タイトル</strong></label>
                 <input type="text" class="form-control" name="title" id="editTitle">
               </div>
               <div class="form-group">
                 <label for="editContent"> <strong class="lead">本文</strong></label>
                 <textarea class="form-control rounded-0" id="editContent" rows="10" name="content"></textarea>
               </div>
-              <div class="">
-                <label for="postModalTag"><strong class="lead">タグを選択</strong><span class="text-muted">※タグは10個まで選択可能</span></label>
+              <div class="form-group">
+                <label for="editTag"><strong class="lead">タグを選択</strong></label>
+                <input type="text" class="form-control{{ $errors->has('editTag') ? 'is-invalid' : '' }}" id="editTag" name="editTag" value="{{ old('editTag') }}" >
               </div>
             </div>
             <div class="modal-footer">

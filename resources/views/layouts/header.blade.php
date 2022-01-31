@@ -65,8 +65,11 @@
                     </div>
                     <div class="form-group">
                       <label for="postModalTags"><strong class="lead">タグを選択</strong></label>
-                      <input type="text" class="form-control{{ $errors->has('tags') ? 'is-invalid' : '' }}" id="tags" name="tags" value="{{ old('tags') }}" >
+                      <div id="tag_input_add" class="row px-3">
+                        <input type="text" class="form-control col-6 {{ $errors->has('tags') ? 'is-invalid' : '' }}" id="tags" name="tags[]" value="{{ old('tags') }}" >
+                      </div>
                     </div>
+                    <button type="button" class="btn btn-sm btn-primary" onclick="addInputTag()">+</button>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>

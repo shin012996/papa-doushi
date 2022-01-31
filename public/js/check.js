@@ -44,3 +44,24 @@ function editCheck() {
   }
   document.hensyu.submit();
 }
+
+// 削除前確認
+function deletePost(e) {
+  'use strict';
+
+  if (confirm('本当に削除してもいいてすか？')) {
+    document.getElementByld('form_' + e.dataset.id).submit();
+  }
+}
+
+// 投稿モーダル タグ入力欄追加
+function addInputTag() {
+  const tag_input_add = document.getElementById("tag_input_add");
+  const input_tag = document.createElement('input');
+  input_tag.classList.add('form-control');
+  input_tag.classList.add('col-6');
+  input_tag.name = 'tags[]';
+  console.log(tag_input_add);
+  tag_input_add.appendChild(input_tag);
+}
+

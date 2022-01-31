@@ -19,27 +19,52 @@ class PostsController extends Controller
     public function index(Post $post, Follower $follower, Request $request)
     {
         $category = $request->category ?: 'new';
-        
+        $keyword = $request->keyword ?: '';
+        $user_keyword = $request->user_keyword ?: '';
+        $tags_keyword = $request->tags_keyword ?: '';
+
         $user = auth()->user();
+        $query = Post::query();
         if($category == 'new') {
-            $timelines = $post->getTimeLinesByNew();
+            $query->orderBy('id', 'DESC');
         } elseif($category == 'follow') {
             $follow_ids = $follower->followingIds($user->id);
-            // followed_idだけ抜き出す
-            $following_ids = $follow_ids->pluck('followed_id')->toArray();
-            $timelines = $post->getTimelinesByFollow($user->id, $following_ids);
+            $follow_ids[] = $user->id;
+            $query->whereIn('user_id', $follow_ids)->orderBy('id', 'DESC');
         } elseif($category == 'unanswered') {
-            $timelines = $post->getTimelinesByUnAnswered($post->id);
+            $query->where('comment_count', '=', 0)->orderBy('id', 'DESC');
         } elseif($category == 'unresolved') {
-            $timelines = $post->getTimelinesByUnSolved();
+            $query->where('is_solved', '=', 0)->orderBy('id', 'DESC');
         } elseif($category == 'solved') {
-            $timelines = $post->getTimelinesBySolved();
+            $query->where('is_solved', '=', 1)->orderBy('id', 'DESC');
         }
+
+        if ($keyword != '') {
+            $query->where('title', 'like', "%$keyword%");
+        }
+
+        if ($user_keyword != '') {
+            $query->whereHas('User', function($q) use($user_keyword){
+                $q->where('screen_name', 'like', "%$user_keyword%");
+            });
+        }
+
+        if ($tags_keyword != '') {
+            $query->whereHas('Tags', function($q) use($tags_keyword){
+                $q->where('name', 'like', "%$tags_keyword%");
+            });
+        }
+
+        $timelines = $query->paginate(15);
+
 
         return view('posts.index', [
             'user'      => $user,
             'timelines' => $timelines,
             'category' => $category,
+            'keyword' => $keyword,
+            'user_keyword' => $user_keyword,
+            'tags_keyword' => $tags_keyword
         ]);
     }
 
@@ -71,8 +96,10 @@ class PostsController extends Controller
         $validator->validate();
 
        $tags = [];
-       $record = Tag::firstOrCreate(['name' => $request->tags]);
-       array_push($tags, $record);
+       foreach ($request->tags as $tag) {
+           $record = Tag::firstOrCreate(['name' => $tag]);
+           array_push($tags, $record);
+       }
 
        $tags_id = [];
         foreach ($tags as $tag) {
@@ -99,7 +126,7 @@ class PostsController extends Controller
         $posts = $post->getEditPost($user->id, $post->id);
 
         if (!isset($posts)) {
-            return redirect('posts');
+            return redirect('/posts');
         }
 
         return view('posts.edit', [
@@ -120,5 +147,14 @@ class PostsController extends Controller
         $post->save();
 
         return back();
+    }
+
+    // 投稿機能の削除
+    public function destroy(Post $post)
+    {
+        $post = Post::findOrFail($post->id);
+        $post->delete();
+
+        return redirect('/posts');
     }
 }

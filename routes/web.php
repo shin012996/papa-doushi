@@ -43,6 +43,8 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('/posts/store', 'PostsController@store'); //新規投稿処理
     Route::post('/posts/edit/{post}', 'PostsController@edit')->name('posts.edit'); // 投稿内容の編集
     Route::post('/posts/update/{post}', 'PostsController@update')->name('posts.update'); // 投稿内容の更新処理
+    Route::delete('/posts/destroy/{post}', 'PostsController@destroy')->name('posts.destroy'); // 投稿内容の削除
+
 
     // コメント機能
     Route::post('/comments', 'CommentsController@store')->name('comments.store');

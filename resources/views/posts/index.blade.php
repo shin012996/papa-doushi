@@ -32,19 +32,16 @@
               <div class="card-header">
                 <!-- 検索バー -->
                 <div class="form-group">
-                  <form class="form-inline justify-content-center">
+                  <form class="form-inline justify-content-center" action="{{ url('/posts') }}">
                     <div class="d-flex">
-                      <input class="form-control" type="text" placeholder="Search..." aria-label="Search">
-                      <button type="submit" class="btn btn-outline-info"><a href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0z" fill="none"/><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>             
-                      </a></button>
+                      <input class="form-control" type="text" name="keyword" value="{{ $keyword }}"  placeholder="タイトル" aria-label="Search">
+                      <input class="form-control" type="text" name="tags_keyword" value="{{ $tags_keyword }}"  placeholder="タグ" aria-label="Search">
+                      <input class="form-control" type="text" name="user_keyword" value="{{ $user_keyword }}"  placeholder="ユーザー名" aria-label="Search">
+                      <button type="submit" class="btn btn-outline-info"><a href="#"><i class="fas fa-search"></i></a></button>
                     </div>
                   </form>
                 </div>
-                <a class="text-dark" href="{{ url('users/') }}">
-                  ユーザ一覧
-                  <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><rect fill="none" height="24" width="24"/><g><path d="M12,12.75c1.63,0,3.07,0.39,4.24,0.9c1.08,0.48,1.76,1.56,1.76,2.73L18,18H6l0-1.61c0-1.18,0.68-2.26,1.76-2.73 C8.93,13.14,10.37,12.75,12,12.75z M4,13c1.1,0,2-0.9,2-2c0-1.1-0.9-2-2-2s-2,0.9-2,2C2,12.1,2.9,13,4,13z M5.13,14.1 C4.76,14.04,4.39,14,4,14c-0.99,0-1.93,0.21-2.78,0.58C0.48,14.9,0,15.62,0,16.43V18l4.5,0v-1.61C4.5,15.56,4.73,14.78,5.13,14.1z M20,13c1.1,0,2-0.9,2-2c0-1.1-0.9-2-2-2s-2,0.9-2,2C18,12.1,18.9,13,20,13z M24,16.43c0-0.81-0.48-1.53-1.22-1.85 C21.93,14.21,20.99,14,20,14c-0.39,0-0.76,0.04-1.13,0.1c0.4,0.68,0.63,1.46,0.63,2.29V18l4.5,0V16.43z M12,6c1.66,0,3,1.34,3,3 c0,1.66-1.34,3-3,3s-3-1.34-3-3C9,7.34,10.34,6,12,6z"/></g></svg>
-                </a>
+                <a class="text-dark" href="{{ url('users/') }}">ユーザ一覧<i class="fas fa-users"></i></a>
               </div>
               <div class="card-body col-12 p-0">
                 @if (isset($timelines))
@@ -80,26 +77,35 @@
                                 </a>
                               </h3>
                             </div>
+                            <div class="row"> 
+                              @foreach ($timeline->tags as $tag)
+                                <div class="justify-content-start">
+                                  <a href="/posts?tags_keyword={{ $tag->name }}" class="btn btn-sm btn-info text-white">
+                                    {{ $tag->name }}
+                                  </a> 
+                                </div>
+                              @endforeach
+                            </div>
                             <div class="card-footer py-1 d-flex justify-content-end bg-white">
                               @if ($timeline->user->id === Auth::user()->id)
                                 <div class="dropdown mr-3 d-flex align-items-center">
                                   <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                                    <i class="fas fa-ellipsis-v"></i>
                                   </a>
                                   <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <form method="POST" action="{{ url('posts/' .$timeline->id) }}" class="mb-0">
+                                    <button type="button" class="dropdown-item btn btn btn-outline-info btn-block" data-toggle="modal" data-target="#postEditModal" onclick="edit('{{ $timeline->id }}', '{{ $timeline->title }}', '{{ $timeline->content }}')">編集</button>                                                                                        
+                                    <form method="POST" action="{{ url('posts/destroy/' .$timeline->id) }}" class="mb-0" id="form_{{ $timeline->id }}">
                                       @csrf
                                       @method('DELETE')
                                       
-                                      <button type="button" class="dropdown-item btn btn btn-outline-info btn-block" data-toggle="modal" data-target="#postEditModal" onclick="edit({{ $timeline->id }}, '{{ $timeline->title }}', '{{ $timeline->content }}')">編集</button>                                                                                        
-                                      <button type="submit" class="dropdown-item btn-block">削除</button>
+                                      <button type="submit" class="dropdown-item btn-block" onclick="deletePost(this);">削除</button>
                                     </form>
                                   </div>
                                 </div>
                               @endif
                                 <div class="mr-3 d-flex align-items-center">
                                     <a href="{{ url('posts/details/' .$timeline->id) }}">
-                                      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0z" fill="none"/><path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18zM18 14H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
+                                      <i class="far fa-comments"></i>
                                     </a>
                                 </div>
                                 <div class="d-flex align-items-center">
@@ -108,33 +114,14 @@
                                       @csrf
       
                                       <input type="hidden" name="post_id" value="{{ $timeline->id }}">
-                                      <button class="btn p-0 border-0 bg-white text-primary">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M4.25 2.5c-1.336 0-2.75 1.164-2.75 3 0 2.15 1.58 4.144 3.365 5.682A20.565 20.565 0 008 13.393a20.561 20.561 0 003.135-2.211C12.92 9.644 14.5 7.65 14.5 5.5c0-1.836-1.414-3-2.75-3-1.373 0-2.609.986-3.029 2.456a.75.75 0 01-1.442 0C6.859 3.486 5.623 2.5 4.25 2.5zM8 14.25l-.345.666-.002-.001-.006-.003-.018-.01a7.643 7.643 0 01-.31-.17 22.075 22.075 0 01-3.434-2.414C2.045 10.731 0 8.35 0 5.5 0 2.836 2.086 1 4.25 1 5.797 1 7.153 1.802 8 3.02 8.847 1.802 10.203 1 11.75 1 13.914 1 16 2.836 16 5.5c0 2.85-2.045 5.231-3.885 6.818a22.08 22.08 0 01-3.744 2.584l-.018.01-.006.003h-.002L8 14.25zm0 0l.345.666a.752.752 0 01-.69 0L8 14.25z"></path></svg>
-                                      </button>
+                                      <button class="btn p-0 border-0 bg-white text-primary"><i class="far fa-heart"></i></button>
                                     </form>
                                   @else
                                     <form method="POST" action="{{ url('favorites/' .array_column($timeline->favorites->toArray(), 'id', 'user_id')[$user->id]) }}" class="mb-0">
                                       @csrf
                                       @method('DELETE')
       
-                                      <button type="submit" class="btn p-0 border-0 bg-white text-danger">
-                                        <svg version="1.1" id="_x31_0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="width: 16px; height: 16px; opacity: 1;" xml:space="preserve">
-                                          <style type="text/css">
-                                            .st0{fill:#374149;}
-                                          </style>
-                                          <g>
-                                            <path class="st0" d="M248.787,476.68c1.654,2.676,4.334,4.253,7.246,4.253c2.838,0,5.514-1.577,7.168-4.253
-                                              c14.729-24.731,55.207-58.203,102.07-97.033c18.901-15.67,38.514-31.818,57.807-48.593
-                                              c76.474-66.552,105.538-143.972,79.703-212.408c-19.135-50.801-66.786-87.58-113.41-87.58h-0.392
-                                              c-70.198,0.3-115.895,48.058-131.262,66.286c-0.688,0.8-1.407,1.631-2.018,2.362c-12.622-16.09-59.318-68.333-132.686-68.648
-                                              h-0.315c-46.705,0-94.352,36.779-113.491,87.58c-25.831,68.436,3.307,145.856,79.704,212.408
-                                              c19.294,16.774,38.906,32.922,57.807,48.593C193.58,418.477,234.059,451.949,248.787,476.68z M74.451,208.557
-                                              c-2.711,5.753-5.288,11.598-7.572,17.632c-16.802-30.915-20.324-61.353-9.868-89.272c12.759-34.184,40.167-52.77,65.606-54.658
-                                              c19.87-1.511,37.168,5.568,51.343,13.71c0.154,0.092,0.315,0.177,0.469,0.269c0.511,0.296,0.985,0.6,1.488,0.896
-                                              c1.412,0.862,2.796,1.723,4.115,2.573c-18.005,9.053-35.068,20.532-50.643,34.53C105.646,155.576,87.361,180.876,74.451,208.557z" style="fill: rgb(223, 86, 86);"></path>
-                                          </g>
-                                          </svg>
-                                      </button>
+                                      <button type="submit" class="btn p-0 border-0 bg-white text-danger"><i class="fas fa-heart"></i></button>
                                     </form>
                                   @endif
                                 </div>
@@ -147,7 +134,7 @@
             </div>
           </div>
           <div class="my-4 d-flex justify-content-center">
-              {{ $timelines->links() }}
+              {{$timelines->appends(['keyword' => $keyword, 'category' => $category])->links()}}
           </div>
         </div>
       </div>
