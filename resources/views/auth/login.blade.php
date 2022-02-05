@@ -64,6 +64,10 @@
                                 @endif
                             </div>
                         </div>
+
+                        <div class="row">
+                            <a class="mx-auto pt-3" href="/">前のページに戻る</a>
+                        </div>
                     </form>
                 </div>
             </div>

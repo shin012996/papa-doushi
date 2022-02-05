@@ -55,8 +55,9 @@ class PostsController extends Controller
             });
         }
 
-        $timelines = $query->paginate(15);
+        $timelines = $query->paginate(10);
 
+        
 
         return view('posts.index', [
             'user'      => $user,

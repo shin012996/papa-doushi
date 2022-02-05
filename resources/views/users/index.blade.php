@@ -7,10 +7,14 @@
           @foreach ($all_users as $user)
               <div class="card">
                   <div class="card-haeder p-3 w-100 d-flex">
-                      <img src="{{ asset('storage/profile_image/' .$user->profile_image) }}" class="rounded-circle" width="50" height="50">
+                    @if($user->profile_image == null)
+                        <img src="{{ asset('img/no-image.png') }}" class="rounded-circle" width="50" height="50">
+                    @else
+                        <img src="{{ asset('storage/profile_image/' .$user->profile_image) }}" class="rounded-circle" width="100" height="100">
+                    @endif
                       <div class="ml-2 d-flex flex-column">
                           <p class="mb-0">{{ $user->name }}</p>
-                          <a href="{{ url('users/' .$user->id) }}" class="text-secondary">{{ $user->screen_name }}</a>
+                          <a href="{{ url('users/show/' .$user->id) }}" class="text-secondary">{{ $user->screen_name }}</a>
                       </div>
                       @if (auth()->user()->isFollowed($user->id))
                         <div class="px-2">

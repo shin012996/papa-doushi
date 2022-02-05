@@ -65,3 +65,15 @@ function addInputTag() {
   tag_input_add.appendChild(input_tag);
 }
 
+// 投稿編集モーダル タグ入力欄追加
+function addInputEditTag() {
+  const editTag_input_add = document.getElementById("editTag_input_add");
+  const input_tag = document.createElement('input');
+  input_tag.classList.add('form-control');
+  input_tag.classList.add('col-6');
+  input_tag.name = 'editTag[]';
+  console.log(editTag_input_add);
+  editTag_input_add.appendChild(input_tag);
+}
+
+

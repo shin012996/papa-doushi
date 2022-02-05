@@ -34,6 +34,7 @@ class UsersController extends Controller
          $follow_count = $follower->getFollowCount($user->id);
          $follower_count = $follower->getFollowerCount($user->id);
         
+        //  \dd($user);
 
          return view('users.show', [
             'user'           => $user,

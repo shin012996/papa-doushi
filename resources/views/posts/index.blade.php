@@ -62,7 +62,11 @@
                       </div>
                         <div class="questionList-left col-10 p-0">
                             <div class="card-haeder p-3 w-100 d-flex">
-                              <img src="{{ asset('storage/profile_image/' .$timeline->user->profile_image) }}" class="rounded-circle" width="50" height="50">
+                              @if($timeline->user->profile_image == null)
+                                <img src="{{ asset('img/no-image.png') }}" class="rounded-circle" width="50" height="50">
+                              @else
+                                <img src="{{ asset('storage/profile_image/' .$timeline->user->profile_image) }}" class="rounded-circle" width="50" height="50">
+                              @endif
                               <div class="ml-2 d-flex flex-column">
                                   <a href="{{ url('users/show/' .$timeline->user->id) }}" class="text-secondary">{{ $timeline->user->screen_name }}</a>
                               </div>
@@ -80,7 +84,7 @@
                             <div class="row"> 
                               @foreach ($timeline->tags as $tag)
                                 <div class="justify-content-start">
-                                  <a href="/posts?tags_keyword={{ $tag->name }}" class="btn btn-sm btn-info text-white">
+                                  <a href="/posts?tags_keyword={{ $tag->name }}" class="btn btn-sm btn-info text-white mr-2">
                                     {{ $tag->name }}
                                   </a> 
                                 </div>
@@ -93,7 +97,7 @@
                                     <i class="fas fa-ellipsis-v"></i>
                                   </a>
                                   <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <button type="button" class="dropdown-item btn btn btn-outline-info btn-block" data-toggle="modal" data-target="#postEditModal" onclick="edit('{{ $timeline->id }}', '{{ $timeline->title }}', '{{ $timeline->content }}')">編集</button>                                                                                        
+                                    <button type="button" class="dropdown-item btn btn btn-outline-info btn-block" data-toggle="modal" data-target="#postEditModal" onclick="edit('{{ $timeline->id }}', '{{ $timeline->title }}', '{{ $timeline->content }}', '{{ $timeline->tags }}')">編集</button>                                                                                        
                                     <form method="POST" action="{{ url('posts/destroy/' .$timeline->id) }}" class="mb-0" id="form_{{ $timeline->id }}">
                                       @csrf
                                       @method('DELETE')
@@ -121,7 +125,22 @@
                                       @csrf
                                       @method('DELETE')
       
-                                      <button type="submit" class="btn p-0 border-0 bg-white text-danger"><i class="fas fa-heart"></i></button>
+                                      <button type="submit" class="btn p-0 border-0 bg-white text-danger"><svg version="1.1" id="_x31_0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="width: 16px; height: 16px; opacity: 1;" xml:space="preserve">
+                                        <style type="text/css">
+                                          .st0{fill:#374149;}
+                                        </style>
+                                        <g>
+                                          <path class="st0" d="M248.787,476.68c1.654,2.676,4.334,4.253,7.246,4.253c2.838,0,5.514-1.577,7.168-4.253
+                                            c14.729-24.731,55.207-58.203,102.07-97.033c18.901-15.67,38.514-31.818,57.807-48.593
+                                            c76.474-66.552,105.538-143.972,79.703-212.408c-19.135-50.801-66.786-87.58-113.41-87.58h-0.392
+                                            c-70.198,0.3-115.895,48.058-131.262,66.286c-0.688,0.8-1.407,1.631-2.018,2.362c-12.622-16.09-59.318-68.333-132.686-68.648
+                                            h-0.315c-46.705,0-94.352,36.779-113.491,87.58c-25.831,68.436,3.307,145.856,79.704,212.408
+                                            c19.294,16.774,38.906,32.922,57.807,48.593C193.58,418.477,234.059,451.949,248.787,476.68z M74.451,208.557
+                                            c-2.711,5.753-5.288,11.598-7.572,17.632c-16.802-30.915-20.324-61.353-9.868-89.272c12.759-34.184,40.167-52.77,65.606-54.658
+                                            c19.87-1.511,37.168,5.568,51.343,13.71c0.154,0.092,0.315,0.177,0.469,0.269c0.511,0.296,0.985,0.6,1.488,0.896
+                                            c1.412,0.862,2.796,1.723,4.115,2.573c-18.005,9.053-35.068,20.532-50.643,34.53C105.646,155.576,87.361,180.876,74.451,208.557z" style="fill: rgb(223, 86, 86);"></path>
+                                        </g>
+                                        </svg></button>
                                     </form>
                                   @endif
                                 </div>
@@ -175,8 +194,11 @@
             </div>
             <div class="form-group">
               <label for="editTag"><strong class="lead">タグを選択</strong></label>
-              <input type="text" class="form-control{{ $errors->has('editTag') ? 'is-invalid' : '' }}" id="editTag" name="editTag" value="{{ old('editTag') }}" >
+              <div id="editTag_input_add" class="row px-3">
+                <input type="text" class="form-control col-6 {{ $errors->has('tags') ? 'is-invalid' : '' }}" id="tags" name="editTag[]" value="{{ old('tags') }}" >
+              </div>
             </div>
+            <button type="button" class="btn btn-sm" onclick="addInputEditTag()"><i class="fas fa-plus"></i></button>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
