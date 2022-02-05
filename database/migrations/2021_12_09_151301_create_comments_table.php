@@ -18,7 +18,6 @@ class CreateCommentsTable extends Migration
             $table->unsignedInteger('user_id')->comment('ユーザID');
             $table->unsignedInteger('post_id')->comment('ポストID');
             $table->string('text')->comment('本文');
-            $table->softDeletes();
             $table->timestamps();
 
             $table->index('id');
